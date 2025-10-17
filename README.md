@@ -91,12 +91,20 @@ Auto-generates statistics about your brain activity.
 
 **Required secrets:** None
 
-#### Todo Reminders (Daily 8 AM UTC)
-Sends Telegram notifications for overdue/due todos.
+#### Daily Digest (Daily 8 AM UTC)
+Sends a comprehensive morning digest via Telegram including:
+- 🌤 Weather for your location
+- 💡 Inspirational quote of the day
+- 📝 Todo status (overdue, today, upcoming)
+- 📊 Brain activity stats
 
 **Required secrets:**
 - `TELEGRAM_BOT_TOKEN`: Your Telegram bot token ([create one](https://t.me/botfather))
 - `TELEGRAM_CHAT_ID`: Your Telegram user ID ([get it](https://t.me/userinfobot))
+
+**Required config:**
+- Copy `.brainconfig.template.yml` to `.brainconfig.yml`
+- Update your location coordinates (latitude/longitude)
 
 Add secrets in: `Settings → Secrets and variables → Actions → New repository secret`
 

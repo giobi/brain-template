@@ -1,0 +1,26 @@
+# Brain Configuration
+# This file contains personal preferences and settings for your brain
+
+# Location for weather and other location-based features
+location:
+  city: "Verbania"
+  country: "Italia"
+  latitude: 45.9214
+  longitude: 8.5514
+  timezone: "Europe/Rome"
+
+# Daily digest preferences
+daily_digest:
+  enabled: true
+  time: "08:00"  # UTC time for digest
+  include:
+    weather: true
+    quote: true
+    todos: true
+    stats_summary: true
+
+# Telegram notifications
+notifications:
+  telegram:
+    enabled: true
+    # Bot token and chat ID are in GitHub Secrets for security

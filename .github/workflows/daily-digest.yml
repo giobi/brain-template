@@ -1,0 +1,175 @@
+name: Daily Digest
+
+on:
+  schedule:
+    # Every day at 8:00 AM UTC (9:00 AM in Italy during winter, 10:00 AM in summer)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read config
+        id: config
+        run: |
+          # Parse YAML config (simple parsing for this use case)
+          CITY=$(grep "city:" .brainconfig.yml | sed 's/.*city: *"\(.*\)"/\1/')
+          COUNTRY=$(grep "country:" .brainconfig.yml | sed 's/.*country: *"\(.*\)"/\1/')
+          LAT=$(grep "latitude:" .brainconfig.yml | sed 's/.*latitude: *//')
+          LON=$(grep "longitude:" .brainconfig.yml | sed 's/.*longitude: *//')
+
+          echo "city=$CITY" >> $GITHUB_OUTPUT
+          echo "country=$COUNTRY" >> $GITHUB_OUTPUT
+          echo "lat=$LAT" >> $GITHUB_OUTPUT
+          echo "lon=$LON" >> $GITHUB_OUTPUT
+
+      - name: Get weather
+        id: weather
+        run: |
+          # Use wttr.in for weather (supports coordinates)
+          LAT="${{ steps.config.outputs.lat }}"
+          LON="${{ steps.config.outputs.lon }}"
+
+          # Get weather in Italian, format: current condition + temp
+          WEATHER_RAW=$(curl -s "https://wttr.in/$LAT,$LON?format=%C+%t&lang=it")
+
+          # Get forecast for today
+          FORECAST=$(curl -s "https://wttr.in/$LAT,$LON?format=3&lang=it" | head -1)
+
+          echo "current=$WEATHER_RAW" >> $GITHUB_OUTPUT
+          echo "forecast=$FORECAST" >> $GITHUB_OUTPUT
+
+      - name: Get quote of the day
+        id: quote
+        run: |
+          # Get quote of the day from ZenQuotes
+          QUOTE_JSON=$(curl -s "https://zenquotes.io/api/today")
+          # Extract quote and author (simple parsing without jq)
+          QUOTE_TEXT=$(echo "$QUOTE_JSON" | sed 's/.*"q":"\([^"]*\)".*/\1/')
+          QUOTE_AUTHOR=$(echo "$QUOTE_JSON" | sed 's/.*"a":"\([^"]*\)".*/\1/')
+
+          echo "text=$QUOTE_TEXT" >> $GITHUB_OUTPUT
+          echo "author=$QUOTE_AUTHOR" >> $GITHUB_OUTPUT
+
+      - name: Check todos
+        id: todos
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          OVERDUE=""
+          DUE_TODAY=""
+          UPCOMING=""
+          TODO_COUNT=0
+
+          # Find all todo files
+          if [ -d "todo" ]; then
+            for file in todo/*.md; do
+              if [ -f "$file" ]; then
+                FILENAME=$(basename "$file")
+                if [[ $FILENAME =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]; then
+                  DUE_DATE="${BASH_REMATCH[1]}"
+                  TASK_NAME=$(echo "$FILENAME" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//' | sed 's/.md$//' | tr '-' ' ')
+
+                  TODO_COUNT=$((TODO_COUNT + 1))
+
+                  if [[ "$DUE_DATE" < "$TODAY" ]]; then
+                    OVERDUE="${OVERDUE}❌ **${TASK_NAME}** (scaduto: ${DUE_DATE})\n"
+                  elif [[ "$DUE_DATE" == "$TODAY" ]]; then
+                    DUE_TODAY="${DUE_TODAY}⏰ **${TASK_NAME}** (scade oggi!)\n"
+                  else
+                    # Show upcoming todos (next 7 days)
+                    DAYS_UNTIL=$(( ( $(date -d "$DUE_DATE" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+                    if [ $DAYS_UNTIL -le 7 ]; then
+                      UPCOMING="${UPCOMING}📅 **${TASK_NAME}** (tra $DAYS_UNTIL giorni: ${DUE_DATE})\n"
+                    fi
+                  fi
+                fi
+              fi
+            done
+          fi
+
+          echo "overdue=$OVERDUE" >> $GITHUB_OUTPUT
+          echo "due_today=$DUE_TODAY" >> $GITHUB_OUTPUT
+          echo "upcoming=$UPCOMING" >> $GITHUB_OUTPUT
+          echo "count=$TODO_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Get brain stats
+        id: stats
+        run: |
+          # Quick stats about brain activity
+          TOTAL_FILES=$(find . -name "*.md" -not -path "./.git/*" -not -path "./node_modules/*" | wc -l)
+          DIARY_ENTRIES=$(find diary -name "*.md" 2>/dev/null | wc -l || echo 0)
+
+          # Commits in last 24 hours
+          COMMITS_TODAY=$(git log --since="24 hours ago" --oneline | wc -l)
+
+          echo "total_files=$TOTAL_FILES" >> $GITHUB_OUTPUT
+          echo "diary_entries=$DIARY_ENTRIES" >> $GITHUB_OUTPUT
+          echo "commits_today=$COMMITS_TODAY" >> $GITHUB_OUTPUT
+
+      - name: Build and send digest
+        run: |
+          # Build the digest message
+          MESSAGE="🧠 *Daily Brain Digest* - $(date +%d/%m/%Y)
+
+🌤 *Meteo a ${{ steps.config.outputs.city }}*
+${{ steps.weather.outputs.current }}
+${{ steps.weather.outputs.forecast }}
+
+💡 *Frase del giorno*
+\"${{ steps.quote.outputs.text }}\"
+— _${{ steps.quote.outputs.author }}_
+
+📝 *Todos Status*"
+
+          # Add todo sections if they exist
+          if [ -n "${{ steps.todos.outputs.overdue }}" ]; then
+            MESSAGE="${MESSAGE}
+
+🚨 *SCADUTI*
+${{ steps.todos.outputs.overdue }}"
+          fi
+
+          if [ -n "${{ steps.todos.outputs.due_today }}" ]; then
+            MESSAGE="${MESSAGE}
+
+⏰ *OGGI*
+${{ steps.todos.outputs.due_today }}"
+          fi
+
+          if [ -n "${{ steps.todos.outputs.upcoming }}" ]; then
+            MESSAGE="${MESSAGE}
+
+📅 *PROSSIMI 7 GIORNI*
+${{ steps.todos.outputs.upcoming }}"
+          fi
+
+          # If no todos at all
+          if [ "${{ steps.todos.outputs.count }}" -eq 0 ]; then
+            MESSAGE="${MESSAGE}
+✅ Nessun todo attivo - tutto pulito!"
+          fi
+
+          # Add brain stats
+          MESSAGE="${MESSAGE}
+
+📊 *Brain Stats*
+• ${{ steps.stats.outputs.total_files }} file totali
+• ${{ steps.stats.outputs.diary_entries }} diari
+• ${{ steps.stats.outputs.commits_today }} commit nelle ultime 24h"
+
+          # Add call to action
+          MESSAGE="${MESSAGE}
+
+---
+Buona giornata! 🚀"
+
+          # Send to Telegram
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="Markdown" \
+            -d text="$MESSAGE"
