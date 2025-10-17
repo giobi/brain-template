@@ -1,0 +1,85 @@
+name: Weekly Stats
+
+on:
+  schedule:
+    # Every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  generate-stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for commit counting
+
+      - name: Get current week
+        id: week
+        run: |
+          echo "week=$(date +%Y-W%U)" >> $GITHUB_OUTPUT
+          echo "year=$(date +%Y)" >> $GITHUB_OUTPUT
+
+      - name: Generate stats
+        run: |
+          WEEK="${{ steps.week.outputs.week }}"
+          YEAR="${{ steps.week.outputs.year }}"
+          STATS_FILE="stats/${WEEK}.md"
+
+          mkdir -p stats
+
+          # Count files
+          TOTAL_FILES=$(find . -name "*.md" -not -path "./.git/*" -not -path "./node_modules/*" | wc -l)
+          DIARY_ENTRIES=$(find diary -name "*.md" 2>/dev/null | wc -l || echo 0)
+          TODO_FILES=$(find todo -name "*.md" 2>/dev/null | wc -l || echo 0)
+          PROJECT_DOCS=$(find projects -name "*.md" 2>/dev/null | wc -l || echo 0)
+
+          # Count words
+          TOTAL_WORDS=$(find . -name "*.md" -not -path "./.git/*" -not -path "./node_modules/*" -exec cat {} \; | wc -w)
+
+          # Git activity (last 7 days)
+          COMMITS_THIS_WEEK=$(git log --since="7 days ago" --oneline | wc -l)
+          COMMITS_PER_DAY=$(echo "scale=1; $COMMITS_THIS_WEEK / 7" | bc)
+          WORDS_PER_DAY=$(echo "scale=0; $TOTAL_WORDS / 7" | bc)
+
+          # Most active directory
+          MOST_ACTIVE=$(git log --since="7 days ago" --name-only --pretty=format: | grep -v '^$' | cut -d'/' -f1 | sort | uniq -c | sort -rn | head -1 | awk '{print $2}')
+
+          # Generate report
+          cat > "$STATS_FILE" << EOF
+          # Brain Stats - Week $WEEK
+
+          Generated: $(date +"%Y-%m-%d %H:%M UTC")
+
+          ## Content Metrics
+
+          - **Total markdown files**: $TOTAL_FILES
+          - **Total words**: $TOTAL_WORDS
+          - **Diary entries**: $DIARY_ENTRIES
+          - **Active todos**: $TODO_FILES
+          - **Project docs**: $PROJECT_DOCS
+
+          ## Activity Metrics (Last 7 Days)
+
+          - **Commits this week**: $COMMITS_THIS_WEEK
+          - **Average commits/day**: $COMMITS_PER_DAY
+          - **Average words/day**: $WORDS_PER_DAY
+          - **Most active area**: $MOST_ACTIVE
+
+          ## Insight
+
+          $(if [ $COMMITS_THIS_WEEK -gt 20 ]; then echo "Highly productive week! 🔥"; elif [ $COMMITS_THIS_WEEK -gt 10 ]; then echo "Solid activity level 👍"; else echo "Quieter week - time to ramp up? 💪"; fi)
+          EOF
+
+          echo "Stats generated at $STATS_FILE"
+          cat "$STATS_FILE"
+
+      - name: Commit stats
+        run: |
+          git config user.name "Brain Stats Bot"
+          git config user.email "bot@brain.local"
+          git add stats/
+          git diff --quiet || git commit -m "📊 Weekly stats: ${{ steps.week.outputs.week }}"
+          git push

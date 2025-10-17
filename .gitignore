@@ -1,0 +1,38 @@
+# Personal prompt file (use prompt.template.md instead)
+prompt.md
+
+# Environment variables (if you keep any here)
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Node modules (if you add any automation scripts)
+node_modules/
+package-lock.json
+yarn.lock
+
+# System files
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# Backup files
+*.bak
+*.backup
+*~
