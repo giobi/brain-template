@@ -27,20 +27,22 @@ Your brain is a **living knowledge base** that:
 
 ```
 brain/
-├── prompt.md              # The heart: loaded by AI every session
-├── projects/              # Project documentation
-│   └── project-name/
-│       └── index.md       # Project overview, status, decisions
-├── diary/                 # Daily logs and reflections
+├── identity.md            # AI personality and behavior rules
+├── personal.md            # Personal context (PRIVATE: projects, preferences)
+├── rules.md               # Operational rules and thresholds
+├── log/                   # Work, business, professional tasks
 │   └── YYYY/
-│       ├── YYYY-MM-DD-diary.md
-│       └── .highlights.md # Year's top moments
-├── todo/                  # Action items with due dates
-│   └── YYYY-MM-DD-task-name.md
-├── tools/                 # Reusable procedures by product/service
-│   └── product-name/
-│       └── procedure.md
-└── stats/                 # Auto-generated weekly statistics
+│       └── YYYY-MM-DD-project-action.md
+├── diary/                 # Personal life, emotions, family
+│   └── YYYY/
+│       └── YYYY-MM-DD-description.md
+├── sketch/                # Quick unprocessed notes
+│   └── temporary-idea.md
+├── projects/              # Projects without GitHub repo
+│   └── project-name.md
+├── tools/                 # Scripts and automation
+│   └── script.sh
+└── stats/                 # Auto-generated statistics
     └── YYYY-WXX.md
 ```
 
@@ -64,23 +66,39 @@ git remote add origin https://github.com/YOUR_USERNAME/brain.git
 git push -u origin main
 ```
 
-### 2. Configure `prompt.md`
+### 2. Configure Core Files
 
-This is **the most important file**. It's loaded by AI at the start of every session.
+Two essential files define your AI assistant:
 
-Copy `prompt.template.md` to `prompt.md` and fill it with:
+#### `identity.md` - AI Personality & Behavior
+Copy `identity.template.md` to `identity.md`:
 
 ```bash
-cp prompt.template.md prompt.md
-# Edit prompt.md with your information
+cp identity.template.md identity.md
+# Edit identity.md with your preferences
 ```
 
 **What to include:**
-- Active projects and their status
-- Your communication style preferences
-- Your working style and practices
-- Infrastructure locations and conventions
-- Any context AI needs to work with you effectively
+- Communication style (formal/informal, technical level, etc.)
+- Multi-profile system (work, pairing, conferences)
+- Workflow rules and automation
+- How AI should interact with you
+
+#### `personal.md` - Your Personal Context (PRIVATE)
+Copy `personal.template.md` to `personal.md`:
+
+```bash
+cp personal.template.md personal.md
+# Edit personal.md with your information
+```
+
+**What to include:**
+- Active projects (repos + local paths)
+- Technical preferences
+- Historical notes
+- Personal information
+
+**IMPORTANT**: Keep `personal.md` private. Add it to `.gitignore` if needed.
 
 ### 3. Set Up GitHub Actions (Optional but Recommended)
 
@@ -182,12 +200,12 @@ What done looks like...
 Load your brain context:
 
 ```
-Please read my brain/prompt.md file to understand the context.
+Please read my brain/identity.md and brain/personal.md files to understand the context.
 ```
 
 Or with Claude Code, simply reference files:
 ```
-Check brain/prompt.md for context
+Check brain/identity.md and brain/personal.md for context
 ```
 
 ### During Work
@@ -205,12 +223,12 @@ Please update my daily diary with what we accomplished today
 
 ## Best Practices
 
-### 1. Keep `prompt.md` Current
-This is your **living context file**. Update it when:
+### 1. Keep Core Files Current
+`identity.md` and `personal.md` are your **living context**. Update them when:
 - Projects change status
 - You learn new practices
-- Infrastructure changes
 - Communication preferences evolve
+- New profiles are needed
 
 ### 2. Daily Diary Habit
 Even 5 minutes at end of day. Capture:
@@ -295,7 +313,7 @@ As often as you want! Some practices:
 
 ### Can I use this with other AI assistants?
 
-**Absolutely!** The format is AI-agnostic. Just load `prompt.md` at session start with:
+**Absolutely!** The format is AI-agnostic. Just load `identity.md` and `personal.md` at session start with:
 - ChatGPT
 - GitHub Copilot
 - Any other AI assistant that can read files
@@ -314,4 +332,4 @@ Created by [giobi](https://github.com/giobi) - Inspired by years of context loss
 
 ---
 
-**Ready to build your brain?** Start with `prompt.md` and go from there. 🧠✨
+**Ready to build your brain?** Start with `identity.md` and `personal.md`, then go from there. 🧠✨
