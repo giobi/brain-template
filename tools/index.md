@@ -1,15 +1,14 @@
 # Tools
 
-Script, automazioni, configurazioni che supportano il brain system.
+Script, utility, comandi riutilizzabili per operazioni ricorrenti.
 
-**Contenuto**: Tool tecnici per gestione brain.
+**Contenuto**: Bash scripts, comandi curl, query utili, snippet riutilizzabili.
 
-**Struttura**: File libera, tipicamente:
-- Script bash/python
-- Config files
-- Utility varie
+**Struttura**: `categoria/nome-tool.md`
 
 **Esempi**:
-- `migrate.sh`
-- `backup.sh`
-- `token-check.py`
+- `linux/system-health-check.md` - Check sistema Linux
+- `newrelic/cost-diagnostics.md` - Query diagnostiche NewRelic
+- `git/cleanup-branches.sh` - Script pulizia branch
+
+**Formato**: Preferibilmente markdown con code blocks, così è consultabile e copiabile.

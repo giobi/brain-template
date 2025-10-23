@@ -1,10 +1,12 @@
-# Personal prompt file (use prompt.template.md instead)
+# Personal files (use template versions instead)
 prompt.md
+personal.md
 
-# Environment variables (if you keep any here)
+# Environment variables (encrypted version .env.gpg IS versioned)
 .env
 .env.local
 .env.*.local
+!.env.gpg
 
 # Editor directories and files
 .vscode/*
