@@ -1,40 +1,26 @@
-# Personal files (use template versions instead)
-prompt.md
-personal.md
-
-# Environment variables (encrypted version .env.gpg IS versioned)
-.env
-.env.local
-.env.*.local
-!.env.gpg
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# OS files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # Temporary files
 *.tmp
-*.temp
-~*
-
-# Node modules (if you add any automation scripts)
-node_modules/
-package-lock.json
-yarn.lock
-
-# System files
-Thumbs.db
-.Spotlight-V100
-.Trashes
-
-# Backup files
 *.bak
-*.backup
-*~
+.env
+.env.backup*
+
+# Config files with secrets
+auth.json
+opencode.json
+
+# Chat history (contains conversation context)
+.chat_history/
+
+# Database backups
+database/backup/
