@@ -1,26 +1,28 @@
+# Secrets - NEVER commit
+.env
+*.env
+.env.*
+
 # OS files
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
 
-# Editor files
+# Editor/IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.sublime-*
 
-# Temporary files
+# Temp files
+tmp/
 *.tmp
+*.temp
 *.bak
-.env
-.env.backup*
 
-# Config files with secrets
-auth.json
-opencode.json
-
-# Chat history (contains conversation context)
-.chat_history/
-
-# Database backups
-database/backup/
+# Logs (optional - uncomment if you want to exclude)
+# *.log
