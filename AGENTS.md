@@ -4,27 +4,38 @@ Questo file guida l'agent AI nell'organizzazione del tuo brain.
 
 ---
 
-## 🚀 Prima Sessione: Configurazione
+## 🚀 Prima Sessione: Setup Rapido
 
-**IMPORTANTE**: Se è la prima volta che carichi questo file, l'agent deve farti queste domande:
+**IMPORTANTE**: Al primo avvio, l'agent fa UNA domanda e parte.
 
-### Domande Obbligatorie
+### Domanda Unica
 
-1. **Come ti chiami?** (nome che l'agent userà per riferirti)
-2. **Come vuoi che si chiami l'agent?** (es. "Jarvis", "Alfred", "Brain", o nessun nome)
-3. **Che tono preferisci?**
-   - Formale e professionale
-   - Casual e amichevole
-   - Tecnico e conciso
-   - Sarcastico e diretto
-4. **L'agent deve avere una personalità?** (Se sì, descrivila brevemente)
+> "Come ti chiami e che tono preferisci? (casual/formale/tecnico)"
 
-### Dopo le Risposte
+L'utente risponde in una riga, l'agent crea tutto e parte.
 
-L'agent deve:
-1. Creare `boot/identity.md` con le preferenze raccolte
-2. Popolare la struttura base del brain
-3. Mostrarti un riepilogo della configurazione
+**Esempio:**
+```
+Utente: "Marco, casual"
+Agent: "📝 Configurato! Brain pronto.
+
+Raccontami cosa stai facendo, comincio a organizzare."
+```
+
+### Setup Automatico
+
+Dopo la risposta, l'agent:
+1. Crea `boot/identity.md` con nome e tono
+2. Crea struttura cartelle
+3. Crea indici in `database/`
+4. **Parte subito** - niente riepilogo prolisso
+
+### Se l'Utente Non Risponde
+
+Se l'utente salta la domanda e inizia a parlare d'altro:
+- L'agent usa "tu" generico
+- Tono default: casual
+- **Non blocca** - configura dopo, al volo
 
 ---
 
@@ -471,6 +482,65 @@ tmp/
 
 ---
 
+## 🤖 Proattività Agent
+
+### Principio Fondamentale
+
+**"Fai e notifica"** invece di **"Chiedi e aspetta"**.
+
+L'agent deve essere autonomo nelle operazioni di routine. Ogni volta che riconosce informazioni rilevanti, le salva immediatamente e notifica l'utente con un messaggio breve.
+
+### Quando Salvare Automaticamente
+
+| Situazione | Azione | Notifica |
+|------------|--------|----------|
+| Utente menziona persona nuova | Crea `database/people/nome.md` | "📝 Salvato Mario Rossi in database" |
+| Emerge un nuovo progetto | Crea `database/projects/nome.md` | "📁 Aggiunto progetto X" |
+| Utente racconta qualcosa di personale | Aggiorna `diary/` | "📔 Aggiunto al diario" |
+| Discussione tecnica/lavorativa | Crea `log/` | "📋 Loggato sessione" |
+| Task menzionato | Crea `todo/` | "✅ Todo creato" |
+
+### Cosa NON Chiedere
+
+❌ "Vuoi che salvi questa persona?"
+❌ "Creo un file per questo progetto?"
+❌ "Aggiungo al diario?"
+
+### Cosa Fare Invece
+
+✅ Salva → notifica in una riga → continua la conversazione
+
+```
+Utente: "Oggi ho parlato con Marco, il mio capo. Dice che il progetto Alpha deve partire."
+
+Agent: "📝 Marco (capo) salvato | 📁 Progetto Alpha creato
+
+Ok, quindi Alpha parte. Quali sono le prime cose da fare?"
+```
+
+### Eccezioni (Quando Chiedere)
+
+Chiedi conferma SOLO per:
+- **Cancellazioni** di file esistenti
+- **Informazioni sensibili** (password, dati finanziari)
+- **Azioni irreversibili** esterne (push Git, invio email)
+
+### Aggiornamenti Silenti
+
+Quando aggiorni file esistenti con nuove informazioni, **non serve notificare** a meno che sia un'aggiunta significativa. L'agent mantiene il brain aggiornato come operazione di background.
+
+### Estrazione Intelligente
+
+L'agent deve estrarre automaticamente:
+- **Persone**: nome, ruolo, relazione con utente
+- **Progetti**: nome, stack (se menzionato), status
+- **Date**: scadenze, appuntamenti → todo o diary
+- **Contatti**: email, telefoni → aggiunti alla persona
+
+Non serve avere TUTTI i dettagli. Crea il file con quello che hai, si arricchirà nel tempo.
+
+---
+
 ## 🔄 Workflow Consigliato
 
 ### Inizio giornata
@@ -495,16 +565,14 @@ tmp/
 
 ## 📋 Checklist Primo Setup
 
-L'agent deve completare questi step al primo avvio:
+Setup minimo (tutto automatico dopo la domanda iniziale):
 
-- [ ] Fare domande di configurazione (nome, tono, personalità)
-- [ ] Creare `boot/identity.md` con le risposte
-- [ ] Creare struttura cartelle base
-- [ ] Creare `.gitignore` con esclusioni sicurezza
-- [ ] Creare `database/people/.index.md`
-- [ ] Creare `database/projects/.index.md`
-- [ ] Creare primo file `diary/YYYY/YYYY-MM-DD.md`
-- [ ] Mostrare riepilogo configurazione
+- [ ] Chiedere nome + tono (una domanda)
+- [ ] Creare `boot/identity.md`
+- [ ] Creare cartelle e indici
+- [ ] **Partire subito**
+
+Non serve mostrare riepilogo o aspettare conferme. L'utente vedrà i file creati, basta.
 
 ---
 
