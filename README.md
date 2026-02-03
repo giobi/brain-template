@@ -1,39 +1,186 @@
-# Brain Template
+# Brain Template 🧠
 
-Un template per organizzare il tuo "second brain" con l'aiuto di AI agents (Claude Code, Codex CLI, ecc).
+A comprehensive template for organizing your "second brain" with AI agents (Claude Code, Codex CLI, etc.) using the **Dilts Framework** for personality customization.
 
-## Quick Start
+## ✨ Features
 
-1. Clona questa repo
-2. Apri con il tuo agent CLI preferito (Claude Code o Codex)
-3. L'agent ti fara' alcune domande per configurare il sistema
-4. Inizia a usare il brain!
+- **Interactive onboarding** with 20+ questions
+- **Dilts Framework** - 8-parameter personality system
+- **Modular system files** (SOUL, IDENTITY, USER, AGENTS, TOOLS)
+- **Example configurations** for different roles
+- **Privacy-first** design
+- **Agent-agnostic** - works with any AI assistant
 
-## Struttura
+## 🚀 Quick Start
+
+1. **Clone this repository**
+   ```bash
+   git clone https://github.com/giobibe/brain-template.git my-brain
+   cd my-brain
+   ```
+
+2. **Open with your AI agent**
+   ```bash
+   claude chat  # or your preferred AI CLI
+   ```
+
+3. **Follow the onboarding**
+   - The agent will read `BOOTSTRAP.md`
+   - Answer 20 questions about yourself and preferences
+   - System files will be auto-generated
+   - `BOOTSTRAP.md` gets deleted after setup
+
+4. **Start using your brain!**
+
+## 📁 Structure
+
+After setup, your brain will have:
 
 ```
 brain/
-├── boot/           # Identita' e configurazione agent
-├── database/
-│   ├── people/     # Persone (contatti, relazioni)
-│   └── projects/   # Progetti attivi e passati
-├── diary/          # Diario personale (vita, emozioni)
-├── log/            # Log di lavoro (task, tecnico)
-├── todo/           # Task da completare
-├── AGENTS.md       # Istruzioni per l'agent (cuore del sistema)
-└── CLAUDE.md       # Puntatore per Claude Code
+├── SOUL.md          # Agent philosophy and boundaries
+├── IDENTITY.md      # Personality parameters (Dilts framework)
+├── USER.md          # Your context and preferences
+├── AGENTS.md        # Operational rules and workflows
+├── TOOLS.md         # Reference and integrations
+├── database/        # Structured knowledge
+│   ├── people/      # Contacts and relationships
+│   ├── companies/   # Organizations
+│   ├── projects/    # Active and past projects
+│   └── tech/        # Technical documentation
+├── diary/           # Personal logs and reflections
+├── log/             # Work logs and technical notes
+├── todo/            # Task management
+├── inbox/           # Temporary staging area
+└── .claude/         # Agent configuration
 ```
 
-## Documentazione
+## 🎭 Dilts Framework
 
-Tutta la documentazione e' in `AGENTS.md`. L'agent la leggera' automaticamente.
+Your agent's personality is defined by **8 independent parameters** (1-10 scale):
 
-## Compatibilita'
+| Parameter | What it controls |
+|-----------|------------------|
+| **Formality** | Communication style (casual ↔ professional) |
+| **Profanity** | Swearing allowance (clean ↔ creative profanity) |
+| **Verbosity** | Response length (concise ↔ thorough) |
+| **Technicality** | Jargon level (ELI5 ↔ maximum precision) |
+| **Proactivity** | Autonomy (ask first ↔ do without asking) |
+| **Security** | Risk tolerance (very cautious ↔ YOLO) |
+| **Warmth** | Engagement level (cold ↔ very warm) |
+| **Sarcasm** | Irony level (sincere ↔ caustic wit) |
 
-- Claude Code (Anthropic)
-- Codex CLI (OpenAI)
-- Qualsiasi agent che legge file markdown
+You can adjust these **dynamically** during conversations:
+- "Be more formal"
+- "Less technical"
+- "Zero swearing"
 
-## License
+## 📚 Example Configurations
 
-MIT
+Check `examples/` for complete setups:
+
+- **Developer** (Alex Chen) - Technical, autonomous, casual
+  - Formality: 3/10, Technicality: 9/10, Proactivity: 9/10
+
+- **Recruiter** (Sarah Miller) - Warm, professional, GDPR-focused
+  - Formality: 6/10, Warmth: 9/10, Security: 4/10 (cautious)
+
+- **Writer** (Marco Bianchi) - Creative, encouraging, Italian
+  - Warmth: 9/10, Verbosity: 7/10, Formality: 4/10
+
+- **Project Manager** (Julia Rodriguez) - Organized, balanced
+  - Formality: 6/10, Proactivity: 8/10, Warmth: 7/10
+
+## 🔧 Customization
+
+### During Setup
+Answer the 20 onboarding questions to customize:
+- Agent name, creature, emoji
+- Your role, sector, timezone
+- All 8 personality parameters
+- Privacy rules
+- Working style preferences
+
+### After Setup
+Edit the system files directly:
+- `SOUL.md` - Philosophy and boundaries
+- `IDENTITY.md` - Personality parameters
+- `USER.md` - Your context
+- `AGENTS.md` - Workflows and rules
+- `TOOLS.md` - Local notes and integrations
+
+Changes take effect immediately in the next session.
+
+## 🔒 Privacy & Security
+
+- All data stays **local** by default
+- `.env` files are gitignored
+- Customizable privacy rules per use case
+- GDPR-compliant example (recruiter)
+- No external sharing without permission
+
+## 📖 Documentation
+
+- [Dilts Framework Guide](docs/dilts-framework.md) - Deep dive into personality parameters
+- [Customization Guide](docs/customization-guide.md) - How to tailor your brain
+- [FAQ](docs/faq.md) - Common questions
+
+## 🤝 Compatible With
+
+- **Claude Code** (Anthropic) - Primary target
+- **Codex CLI** (OpenAI)
+- **Aider**
+- **Cursor**
+- Any AI agent that reads markdown files
+
+## 🛠️ Advanced Features
+
+### Memory System
+- **Daily logs**: `diary/YYYY/YYYY-MM-DD.md`
+- **Work logs**: `log/YYYY/YYYY-MM-DD.md`
+- **Structured data**: `database/{people,companies,projects}/`
+
+### Dynamic Personality
+Change communication style on the fly:
+```
+User: "Be more formal for this email"
+Agent: [adjusts Formality to 8/10]
+
+User: "Back to normal"
+Agent: [reverts to default Formality: 5/10]
+```
+
+### Multi-Context Support
+Different personality profiles for:
+- Work contexts
+- Personal contexts
+- Group chats
+- External communications
+
+## 🌟 What Makes This Different
+
+1. **Personality System**: 8-parameter Dilts framework (not just "tone")
+2. **Interactive Setup**: Guided onboarding, not manual file editing
+3. **Privacy-First**: GDPR examples, local-first design
+4. **Agent-Agnostic**: Works with any AI assistant
+5. **Production-Ready**: Based on real multi-user deployments (ABChat)
+
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE) file
+
+## 🙏 Credits
+
+Based on the **ABChat** multi-workspace architecture by Giobi Fasoli.
+
+Personality framework inspired by **Robert Dilts** Logical Levels model.
+
+## 🐛 Issues & Feedback
+
+Found a bug? Have a suggestion?
+
+Open an issue at: https://github.com/giobibe/brain-template/issues
+
+---
+
+**Ready to build your second brain? Clone this repo and let's go! 🚀**
