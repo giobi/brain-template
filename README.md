@@ -74,21 +74,17 @@ You can adjust these **dynamically** during conversations:
 - "Less technical"
 - "Zero swearing"
 
-## 📚 Example Configurations
+## 🧠 Intelligent Adaptation
 
-Check `examples/` for complete setups:
+The template **researches your domain** during setup:
+- WebSearch for role-specific best practices
+- Identifies privacy/compliance needs (GDPR, HIPAA, etc.)
+- Adapts Dilts parameters intelligently
+- Suggests domain-specific workflows
 
-- **Developer** (Alex Chen) - Technical, autonomous, casual
-  - Formality: 3/10, Technicality: 9/10, Proactivity: 9/10
+**Example:** "Molecular Chef" → Agent researches precision requirements, food safety, creative workflows → Tailors parameters accordingly.
 
-- **Recruiter** (Sarah Miller) - Warm, professional, GDPR-focused
-  - Formality: 6/10, Warmth: 9/10, Security: 4/10 (cautious)
-
-- **Writer** (Marco Bianchi) - Creative, encouraging, Italian
-  - Warmth: 9/10, Verbosity: 7/10, Formality: 4/10
-
-- **Project Manager** (Julia Rodriguez) - Organized, balanced
-  - Formality: 6/10, Proactivity: 8/10, Warmth: 7/10
+No static examples - **every setup is unique** to your role and sector.
 
 ## 🔧 Customization
 
@@ -176,9 +172,10 @@ Different personality profiles for:
 
 1. **Personality System**: 8-parameter Dilts framework (not just "tone")
 2. **Interactive Setup**: Guided onboarding, not manual file editing
-3. **Privacy-First**: GDPR examples, local-first design
-4. **Agent-Agnostic**: Works with any AI assistant
-5. **Production-Ready**: Based on real multi-user deployments (ABChat)
+3. **Intelligent Adaptation**: Researches your domain and tailors setup
+4. **Privacy-First**: Auto-detects compliance needs (GDPR, HIPAA, etc.)
+5. **Agent-Agnostic**: Works with any AI assistant
+6. **Production-Ready**: Based on real multi-user deployments (ABChat)
 
 ## 📝 License
 

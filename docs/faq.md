@@ -199,29 +199,25 @@ Adjust Technicality parameter in `IDENTITY.md`.
 
 The agent should follow conventions in `AGENTS.md`. If not, remind it to read AGENTS.md.
 
-## Examples
+## Intelligent Adaptation
 
-### Where can I see example configurations?
+### How does the template adapt to my role?
 
-Check `examples/` directory:
-- `developer/` - Technical setup
-- `recruiter/` - HR/GDPR setup
-- `writer/` - Creative setup
-- `project-manager/` - PM setup
+During setup (STEP 1.5), the agent:
+1. **Researches your domain** using WebSearch
+2. **Identifies specific needs** (privacy, workflows, tools)
+3. **Adapts Dilts parameters** intelligently
+4. **Tailors system files** with domain-specific context
 
-### Can I copy an example directly?
+Example: "Molecular Chef" → Agent researches precision requirements, food safety, creative workflows → Suggests Technicality 8/10, Warmth 7/10, adds relevant boundaries.
 
-Yes! Copy the system files from any example:
+### Is every setup unique?
 
-```bash
-cp examples/developer/*.md ./
-```
+Yes! No static examples. The agent researches YOUR specific role and sector to create a truly personalized brain.
 
-Then customize to your needs.
+### What if my role is very niche?
 
-### Are the example users real people?
-
-No. All example data is fictional (Alex Chen, Sarah Miller, Marco Bianchi, Julia Rodriguez).
+Perfect! The agent will research it and adapt. "Nuclear Safety Inspector", "Quantum Computing Researcher", "Circus Performer" - all get tailored setups based on domain research.
 
 ## Advanced
 

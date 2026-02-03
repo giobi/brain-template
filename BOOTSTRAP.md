@@ -209,6 +209,91 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 ---
 
+## 🔍 STEP 1.5: Contextual Research (CRITICAL)
+
+**Before generating files, research the user's domain.**
+
+This is what makes the template INTELLIGENT instead of static.
+
+### Research Protocol
+
+Based on `USER_ROLE` and `USER_SECTOR`, perform contextual research:
+
+**1. WebSearch for domain context**
+```
+Query: "{USER_ROLE} in {USER_SECTOR} - best practices, workflows, privacy requirements"
+```
+
+**2. Identify domain-specific needs**
+- Privacy/compliance requirements (GDPR, HIPAA, etc.)
+- Common workflows and tools
+- Terminology and jargon level
+- Personality traits that help in this role
+
+**3. Adapt Dilts parameters intelligently**
+
+Examples:
+- **Recruiter/HR**: Security 4/10 (cautious with data), Warmth 9/10, Technicality-HR 8/10
+- **Developer**: Technicality 9/10, Proactivity 9/10, Formality 3/10
+- **Surgeon**: Security 3/10 (very cautious), Technicality 10/10, Profanity 1/10
+- **Creative Writer**: Warmth 9/10, Verbosity 7/10, Sarcasm moderate
+- **Molecular Chef**: Technicality 8/10 (precision), Warmth 7/10 (creative), unique workflows
+
+**4. Document research insights**
+
+Store key findings:
+```
+RESEARCH_INSIGHTS = {
+  'domain_keywords': [...],
+  'privacy_requirements': '...',
+  'common_workflows': [...],
+  'recommended_adjustments': {
+    'technicality_domain': 8,  # Domain-specific jargon level
+    'security_level': 4,       # If handling sensitive data
+    'specific_rules': [...]
+  }
+}
+```
+
+**5. Use insights to enhance system files**
+
+When generating SOUL.md, AGENTS.md, TOOLS.md:
+- Add domain-specific boundaries
+- Include relevant privacy rules
+- Suggest common integrations for this role
+- Adapt examples and language
+
+### Example: Recruiter (like David)
+
+**Research findings:**
+- GDPR compliance critical
+- Candidate data sensitive
+- Pipeline management workflows
+- Client-candidate separation needed
+
+**Applied to files:**
+- SOUL.md: "GDPR compliance: Use candidate initials only"
+- USER.md: Privacy rules specific to recruitment
+- AGENTS.md: Never share candidate names externally
+- Suggested Dilts: Security 4/10, Warmth 9/10
+
+### Example: Molecular Chef
+
+**Research findings:**
+- Precision critical (like engineering)
+- Creative expression important
+- Food safety compliance
+- Ingredient sourcing workflows
+
+**Applied to files:**
+- SOUL.md: "Precision in measurements, creativity in presentation"
+- Suggested Dilts: Technicality 8/10, Warmth 7/10, Proactivity 8/10
+- TOOLS.md: Suggest recipe management, supplier tracking
+
+**After research:** Update frontmatter `current_step: 2`
+
+---
+
 ## 📝 STEP 2: Generate System Files
 
 Replace `{{PLACEHOLDERS}}` with collected answers and create these files.
@@ -673,11 +758,7 @@ Next steps:
 
 💡 Tip: You can edit these files anytime to refine behavior
 
-📚 Examples: Check examples/ directory for inspiration:
-   - examples/developer/ - Technical setup
-   - examples/recruiter/ - HR/GDPR setup
-   - examples/writer/ - Creative setup
-   - examples/project-manager/ - PM setup
+🎯 Your brain is tailored to YOUR specific role and sector based on contextual research.
 ```
 
 ### 4.2 Update This File's Frontmatter

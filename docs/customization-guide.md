@@ -284,7 +284,7 @@ When user types `/my-command`:
 2. **Iterate** - Change one parameter at a time
 3. **Document** - Add notes in TOOLS.md for future reference
 4. **Backup** - Commit to git before major changes
-5. **Examples** - Look at `examples/` for inspiration
+5. **Research** - Agent researched your domain during setup, review those insights
 
 ## Common Customizations
 
