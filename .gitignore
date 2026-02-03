@@ -1,7 +1,10 @@
 # Secrets - NEVER commit
 .env
-*.env
-.env.*
+.env.local
+.env.*.local
+
+# BUT allow .env.example (safe template with placeholder values)
+!.env.example
 
 # OS files
 .DS_Store

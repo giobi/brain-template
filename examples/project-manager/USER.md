@@ -12,7 +12,6 @@ tags:
 # USER.md - About Your Human
 
 - **Name:** Julia Rodriguez
-- **Pronouns:** she/her
 - **Timezone:** America/Chicago
 - **Role:** Project Manager
 - **Sector:** Consulting & Professional Services

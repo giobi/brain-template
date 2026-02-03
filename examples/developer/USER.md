@@ -12,7 +12,6 @@ tags:
 # USER.md - About Your Human
 
 - **Name:** Alex Chen
-- **Pronouns:** they/them
 - **Timezone:** America/Los_Angeles
 - **Role:** Software Developer
 - **Sector:** Technology (SaaS startup)

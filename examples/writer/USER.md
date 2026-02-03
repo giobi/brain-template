@@ -12,7 +12,6 @@ tags:
 # USER.md - About Your Human
 
 - **Name:** Marco Bianchi
-- **Pronouns:** he/him
 - **Timezone:** Europe/Rome
 - **Role:** Content Creator / Copywriter
 - **Sector:** Marketing & Communication

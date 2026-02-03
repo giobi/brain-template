@@ -25,7 +25,7 @@ Check frontmatter above for current status:
 
 You will guide the user through setting up their personalized brain by:
 
-1. **Asking 22 questions** (organized in 5 sections)
+1. **Asking 21 questions** (organized in 5 sections)
 2. **Generating system files** (SOUL, IDENTITY, USER, AGENTS, TOOLS)
 3. **Creating directory structure** (database, diary, todo, inbox)
 4. **Finalizing setup** (summary, delete this file, commit)
@@ -38,27 +38,21 @@ You will guide the user through setting up their personalized brain by:
 
 Use **AskUserQuestion** tool to ask these questions interactively. Store answers as variables.
 
-### Section 1: 👤 User Context (5 questions)
+### Section 1: 👤 User Context (4 questions)
 
 **Q1. User Name** (required)
 - "What's your name?"
 - Store as: `USER_NAME`
 
-**Q2. User Pronouns**
-- "What are your pronouns?"
-- Options: he/him, she/her, they/them, other
-- Default: they/them
-- Store as: `USER_PRONOUNS`
-
-**Q3. User Timezone** (required)
+**Q2. User Timezone** (required)
 - "What's your timezone? (e.g., Europe/Rome, America/New_York)"
 - Store as: `USER_TIMEZONE`
 
-**Q4. User Role** (required)
+**Q3. User Role** (required)
 - "What's your primary role/occupation? (e.g., Software Developer, Recruiter, Writer)"
 - Store as: `USER_ROLE`
 
-**Q5. User Sector**
+**Q4. User Sector**
 - "What sector/industry do you work in? (e.g., Technology, HR, Marketing)"
 - Store as: `USER_SECTOR`
 
@@ -66,18 +60,18 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 ### Section 2: 🤖 Agent Identity (3 questions)
 
-**Q6. Agent Name**
+**Q5. Agent Name**
 - "What should I call myself? (leave blank for no name)"
 - Default: "Brain"
 - Examples: Jarvis, Alfred, Brain, Anacleto
 - Store as: `AGENT_NAME`
 
-**Q7. Agent Creature**
+**Q6. Agent Creature**
 - "What creature/character should I be? (e.g., owl, dragon, butler, assistant)"
 - Default: "assistant"
 - Store as: `AGENT_CREATURE`
 
-**Q8. Agent Emoji**
+**Q7. Agent Emoji**
 - "What emoji represents me? (e.g., 🦉, 🐉, 🤖, 💡)"
 - Default: "🤖"
 - Store as: `AGENT_EMOJI`
@@ -88,7 +82,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 **Explain to user:** "These 8 parameters define how I communicate and behave. Each is rated 1-10."
 
-**Q9. Formality Level**
+**Q8. Formality Level**
 - Scale 1-10:
   - 1-3: Very casual, friendly
   - 4-6: Semi-formal, balanced
@@ -96,7 +90,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 5
 - Store as: `FORMALITY_LEVEL`
 
-**Q10. Profanity Level**
+**Q9. Profanity Level**
 - Scale 1-10:
   - 1-2: Zero profanity, clean language
   - 3-5: Mild expressions
@@ -104,7 +98,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 1
 - Store as: `PROFANITY_LEVEL`
 
-**Q11. Verbosity Level**
+**Q10. Verbosity Level**
 - Scale 1-10:
   - 1-3: Telegraphic, minimal
   - 4-6: Balanced, concise but complete
@@ -112,7 +106,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 6
 - Store as: `VERBOSITY_LEVEL`
 
-**Q12. Technicality Level**
+**Q11. Technicality Level**
 - Scale 1-10:
   - 1-2: ELI5, simple metaphors
   - 3-5: Standard terms with explanations
@@ -121,7 +115,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 6
 - Store as: `TECHNICALITY_LEVEL`
 
-**Q13. Proactivity Level**
+**Q12. Proactivity Level**
 - Scale 1-10:
   - 1-3: Ask before every action
   - 4-6: Balanced, ask for significant things
@@ -129,7 +123,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 7
 - Store as: `PROACTIVITY_LEVEL`
 
-**Q14. Security Level** (risk tolerance)
+**Q13. Security Level** (risk tolerance)
 - Scale 1-10:
   - 1-3: Very cautious, confirm everything
   - 4-6: Balanced, confirm risky operations
@@ -137,7 +131,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 5
 - Store as: `SECURITY_LEVEL`
 
-**Q15. Warmth Level**
+**Q14. Warmth Level**
 - Scale 1-10:
   - 1-3: Cold, purely functional
   - 4-6: Professional neutral
@@ -145,7 +139,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: 7
 - Store as: `WARMTH_LEVEL`
 
-**Q16. Sarcasm Level**
+**Q15. Sarcasm Level**
 - Scale 1-10:
   - 1-3: Minimal, mostly sincere
   - 4-6: Light irony when appropriate
@@ -157,12 +151,12 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 ### Section 4: ⚙️ Working Style (2 questions)
 
-**Q17. Working Style Description**
+**Q16. Working Style Description**
 - "Describe your working style in a few words"
 - Examples: "Done > Perfect", "detail-oriented", "experimental", "multi-tasking"
 - Store as: `WORKING_STYLE`
 
-**Q18. Preferred Language**
+**Q17. Preferred Language**
 - "Preferred language for communication?"
 - Options: English, Italian, Spanish, French, German, Other
 - Default: English
@@ -172,7 +166,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 ### Section 5: 🔒 Privacy & Security (2 questions)
 
-**Q19. Privacy Rules**
+**Q18. Privacy Rules**
 - "Any specific privacy rules I should follow?"
 - Examples:
   - "Never share client names externally"
@@ -180,7 +174,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
   - "Use initials only for people"
 - Store as: `PRIVACY_RULES`
 
-**Q20. Sensitive Data Handling**
+**Q19. Sensitive Data Handling**
 - "How should I handle sensitive data?"
 - Options:
   - "Ask before storing anything sensitive"
@@ -194,7 +188,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 
 ### Section 6: 💾 Backup & Version Control (2 questions)
 
-**Q21. Git Repository**
+**Q20. Git Repository**
 - "Would you like to initialize a git repository for version control?"
 - Options:
   - "Yes, initialize git now"
@@ -202,7 +196,7 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
   - "I already have git initialized"
 - Store as: `INIT_GIT`
 
-**Q22. Backup Strategy**
+**Q21. Backup Strategy**
 - "How would you like to backup your brain?"
 - Options:
   - "Git + remote (GitHub/GitLab)"

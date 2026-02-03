@@ -12,7 +12,6 @@ tags:
 # USER.md - About Your Human
 
 - **Name:** Sarah Miller
-- **Pronouns:** she/her
 - **Timezone:** America/New_York
 - **Role:** HR Manager / Recruiter
 - **Sector:** Recruitment & HR
