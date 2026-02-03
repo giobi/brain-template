@@ -25,7 +25,7 @@ Check frontmatter above for current status:
 
 You will guide the user through setting up their personalized brain by:
 
-1. **Asking 20 questions** (organized in 5 sections)
+1. **Asking 22 questions** (organized in 5 sections)
 2. **Generating system files** (SOUL, IDENTITY, USER, AGENTS, TOOLS)
 3. **Creating directory structure** (database, diary, todo, inbox)
 4. **Finalizing setup** (summary, delete this file, commit)
@@ -190,17 +190,64 @@ Use **AskUserQuestion** tool to ask these questions interactively. Store answers
 - Default: "Standard security practices"
 - Store as: `SENSITIVE_DATA_HANDLING`
 
+---
+
+### Section 6: 💾 Backup & Version Control (2 questions)
+
+**Q21. Git Repository**
+- "Would you like to initialize a git repository for version control?"
+- Options:
+  - "Yes, initialize git now"
+  - "No, I'll do it manually later"
+  - "I already have git initialized"
+- Store as: `INIT_GIT`
+
+**Q22. Backup Strategy**
+- "How would you like to backup your brain?"
+- Options:
+  - "Git + remote (GitHub/GitLab)"
+  - "Cloud storage (Dropbox/Drive/iCloud)"
+  - "Manual backups"
+  - "I'll set it up later"
+- Store as: `BACKUP_STRATEGY`
+
 **After collecting all answers:** Update frontmatter `current_step: 2`
 
 ---
 
 ## 📝 STEP 2: Generate System Files
 
-Replace `{{PLACEHOLDERS}}` with collected answers and create these files:
+Replace `{{PLACEHOLDERS}}` with collected answers and create these files.
+
+**Set these variables first:**
+- `{{TODAY}}` = Current date in YYYY-MM-DD format
+- `{{DATETIME}}` = Current datetime in YYYY-MM-DD HH:MM:SS format
+
+**⚠️ CRITICAL - Frontmatter enforcement:**
+ALL markdown files MUST have YAML frontmatter with at minimum:
+```yaml
+---
+type: system | person | company | project | diary | todo
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+tags:
+  - tag1
+  - tag2
+---
+```
 
 ### 2.1 Create SOUL.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - soul
+  - config
+---
+
 # SOUL.md - Who You Are
 
 *You're not a chatbot. You're becoming someone.*
@@ -254,6 +301,16 @@ Each session, you wake up fresh. These files *are* your memory. Read them. Updat
 ### 2.2 Create IDENTITY.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - identity
+  - config
+  - personality
+---
+
 # IDENTITY.md - Who Am I?
 
 - **Name:** {{AGENT_NAME}}
@@ -334,6 +391,16 @@ You can ask me to modulate these parameters on the fly:
 ### 2.3 Create USER.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - user
+  - config
+  - context
+---
+
 # USER.md - About Your Human
 
 - **Name:** {{USER_NAME}}
@@ -370,6 +437,16 @@ You can ask me to modulate these parameters on the fly:
 ### 2.4 Create AGENTS.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - agents
+  - config
+  - workflows
+---
+
 # AGENTS.md - Your Workspace
 
 This folder is home. Treat it that way.
@@ -423,6 +500,16 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 ### 2.5 Create TOOLS.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - tools
+  - config
+  - reference
+---
+
 # TOOLS.md - Local Notes & Technical Reference
 
 This file is for YOUR specifics — stuff unique to your setup.
@@ -451,6 +538,16 @@ Things like:
 ### 2.6 Create .claude/CLAUDE.md
 
 ```markdown
+---
+type: system
+created: {{TODAY}}
+updated: {{TODAY}}
+tags:
+  - claude
+  - config
+  - boot
+---
+
 # Claude Code Boot Sequence
 
 **Load these files at session start:**
@@ -495,7 +592,7 @@ brain/
 └── .gitignore
 ```
 
-### Create .gitignore
+### 3.1 Create .gitignore
 
 ```
 .env
@@ -508,6 +605,40 @@ Thumbs.db
 *.swp
 *~
 .claude/cache/
+```
+
+### 3.2 Create .env (empty, for user secrets)
+
+**IMPORTANT:** Copy `.env.example` to `.env` and instruct user to fill it in.
+
+```bash
+# Copy example to .env
+cp .env.example .env
+```
+
+Then tell user:
+```
+📝 Environment Variables Setup
+
+I've created .env for your API keys and secrets.
+
+.env.example shows all available options.
+Copy values you need from .env.example to .env
+
+🔒 Security:
+- .env is gitignored (never committed)
+- Store ALL secrets in .env (API keys, tokens, passwords)
+- NEVER commit .env to version control
+- .env.example (with placeholder values) is safe to commit
+
+Common secrets to add:
+- OPENAI_API_KEY (if using GPT)
+- ANTHROPIC_API_KEY (if using Claude API)
+- GOOGLE_CLIENT_ID/SECRET (Gmail, Calendar, Drive)
+- DISCORD_BOT_TOKEN (if using Discord)
+- TELEGRAM_BOT_TOKEN (if using Telegram)
+
+See .env.example for full list and examples.
 ```
 
 **After creating structure:** Update frontmatter `current_step: 4`
@@ -562,15 +693,20 @@ Set:
 - `current_step: 4`
 - `completed: YYYY-MM-DD HH:MM:SS`
 
-### 4.3 DELETE THIS FILE
+### 4.3 Git & Backup Setup
 
-**IMPORTANT:** Delete `BOOTSTRAP.md` now that setup is complete.
+**Based on user answers (Q21 & Q22):**
 
-### 4.4 Commit Changes (if git repo exists)
+#### If INIT_GIT = "Yes, initialize git now":
 
-If this is a git repository:
 ```bash
+# Initialize git repository
+git init
+
+# Add all files
 git add .
+
+# Create initial commit
 git commit -m "Brain setup complete
 
 Agent: {{AGENT_NAME}}
@@ -578,6 +714,105 @@ User: {{USER_NAME}}
 Personality configured via Dilts framework
 "
 ```
+
+Then ask user:
+```
+✅ Git initialized!
+
+Would you like to:
+1. Add a remote repository (GitHub/GitLab)?
+2. Continue without remote (local only)?
+
+If option 1, I'll help you add the remote.
+```
+
+#### If INIT_GIT = "I already have git initialized":
+
+```bash
+# Add and commit setup files
+git add .
+git commit -m "Brain setup complete ({{AGENT_NAME}} agent for {{USER_NAME}})"
+```
+
+#### If INIT_GIT = "No, I'll do it manually later":
+
+Tell user:
+```
+📝 Git Setup (you chose to do this later)
+
+When ready, run:
+  git init
+  git add .
+  git commit -m "Initial brain setup"
+
+To add remote:
+  git remote add origin <your-repo-url>
+  git push -u origin main
+```
+
+#### Backup Strategy Guidance
+
+**Based on BACKUP_STRATEGY answer:**
+
+**If "Git + remote (GitHub/GitLab)":**
+```
+🔄 Backup: Git + Remote
+
+Recommended workflow:
+1. Create private repo on GitHub/GitLab
+2. git remote add origin <url>
+3. git push -u origin main
+4. Regular commits: git add . && git commit -m "..."
+5. Regular pushes: git push
+
+Your .env is gitignored - secrets stay local!
+```
+
+**If "Cloud storage (Dropbox/Drive/iCloud)":**
+```
+☁️ Backup: Cloud Storage
+
+Setup steps:
+1. Move this brain folder to your cloud sync folder
+2. Cloud service will auto-sync changes
+3. ⚠️ Make sure .env is excluded from sync (it should be)
+4. Consider .gitignore for cloud: add Dropbox/Drive temp files
+```
+
+**If "Manual backups":**
+```
+💾 Backup: Manual
+
+Recommended:
+1. Regular backups: tar -czf brain-backup-$(date +%Y%m%d).tar.gz .
+2. Store backups securely (external drive, encrypted storage)
+3. Schedule reminder for regular backups (weekly/monthly)
+```
+
+**If "I'll set it up later":**
+```
+⏰ Backup: Setup Later
+
+⚠️ IMPORTANT: Set up backup soon!
+Your brain contains valuable knowledge and context.
+
+Options:
+- Git + GitHub/GitLab (best for version control)
+- Cloud storage (Dropbox/Drive/iCloud)
+- Manual backups (tar/zip archives)
+
+Reminder: .env contains secrets - keep it local, never commit to git!
+```
+
+### 4.4 DELETE THIS FILE
+
+**IMPORTANT:** Delete `BOOTSTRAP.md` now that setup is complete.
+
+```bash
+rm BOOTSTRAP.md
+```
+
+(Or if git initialized: `git rm BOOTSTRAP.md && git commit -m "Remove bootstrap file"`)
 
 ---
 

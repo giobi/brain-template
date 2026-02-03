@@ -113,10 +113,27 @@ Changes take effect immediately in the next session.
 ## 🔒 Privacy & Security
 
 - All data stays **local** by default
-- `.env` files are gitignored
+- **Environment variables** - Store API keys in `.env` (gitignored, never committed)
+- `.env.example` provided with common integrations (safe to commit)
 - Customizable privacy rules per use case
 - GDPR-compliant example (recruiter)
 - No external sharing without permission
+
+### Using .env for Secrets
+
+```bash
+# 1. Copy example to .env
+cp .env.example .env
+
+# 2. Edit .env and add your API keys
+# OPENAI_API_KEY=sk-...
+# ANTHROPIC_API_KEY=sk-ant-...
+# DISCORD_BOT_TOKEN=...
+
+# 3. .env is gitignored - your secrets stay local!
+```
+
+**NEVER commit .env to git.** Always use `.env.example` with placeholder values for sharing configurations.
 
 ## 📖 Documentation
 

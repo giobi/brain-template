@@ -1,3 +1,14 @@
+---
+type: system
+created: 2026-02-03
+updated: 2026-02-03
+tags:
+  - user
+  - config
+  - context
+  - example
+---
+
 # USER.md - About Your Human
 
 - **Name:** Julia Rodriguez

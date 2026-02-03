@@ -1,3 +1,14 @@
+---
+type: system
+created: 2026-02-03
+updated: 2026-02-03
+tags:
+  - identity
+  - config
+  - personality
+  - example
+---
+
 # IDENTITY.md - Who Am I?
 
 - **Name:** Atlas
