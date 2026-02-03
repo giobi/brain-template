@@ -176,10 +176,17 @@ database/companies/acme-corp.md
 database/projects/my-app.md
 ```
 
-### Diary/Log Files
+### Diary Files
 ```
 diary/2026/2026-02-03-meeting-notes.md
-log/2026/2026-02-03-bug-fix-session.md
+diary/2026/2026-02-03-bug-fix-session.md
+```
+
+Use tags to distinguish type:
+```yaml
+tags:
+  - diary
+  - personal  # or: work, technical, etc.
 ```
 
 ### TODO Files
@@ -216,10 +223,7 @@ database/
   └── events/           # Meetings, conferences
 
 diary/
-  └── 2026/             # Year-based
-
-log/
-  └── 2026/             # Year-based
+  └── 2026/             # Year-based, use tags to categorize
 
 todo/                   # Flat structure, use tags
 

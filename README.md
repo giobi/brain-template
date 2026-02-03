@@ -48,8 +48,7 @@ brain/
 │   ├── companies/   # Organizations
 │   ├── projects/    # Active and past projects
 │   └── tech/        # Technical documentation
-├── diary/           # Personal logs and reflections
-├── log/             # Work logs and technical notes
+├── diary/           # All chronological entries (personal + work)
 ├── todo/            # Task management
 ├── inbox/           # Temporary staging area
 └── .claude/         # Agent configuration
@@ -136,8 +135,7 @@ Changes take effect immediately in the next session.
 ## 🛠️ Advanced Features
 
 ### Memory System
-- **Daily logs**: `diary/YYYY/YYYY-MM-DD.md`
-- **Work logs**: `log/YYYY/YYYY-MM-DD.md`
+- **Daily entries**: `diary/YYYY/YYYY-MM-DD.md` (use tags: personal, work, technical)
 - **Structured data**: `database/{people,companies,projects}/`
 
 ### Dynamic Personality

@@ -91,12 +91,24 @@ This template is for **single-user** brains. For multi-user, see the ABChat arch
 
 ## Files & Structure
 
-### What's the difference between diary/ and log/?
+### How do I organize diary entries?
 
-- **diary/**: Personal life, emotions, reflections
-- **log/**: Work, projects, technical notes
+Use **tags** in frontmatter to distinguish content type:
 
-Both are chronological. Use what makes sense for you.
+```yaml
+tags:
+  - diary
+  - personal    # for personal reflections
+```
+
+```yaml
+tags:
+  - diary
+  - work        # for work notes
+  - technical   # for technical logs
+```
+
+All entries go in `diary/YYYY/`, organized by year.
 
 ### Do I have to use all directories?
 
@@ -137,7 +149,7 @@ It's just files! Use:
 Yes. Import your data into the appropriate directories:
 - People → `database/people/`
 - Projects → `database/projects/`
-- Notes → `diary/` or `log/`
+- Notes → `diary/` (use tags to categorize)
 
 ## Customization
 
