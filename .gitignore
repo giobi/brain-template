@@ -2,16 +2,15 @@
 .env
 .env.local
 .env.*.local
-
-# BUT allow .env.example (safe template with placeholder values)
 !.env.example
 
-# OS files
+# Storage (local cache, databases)
+storage/*
+!storage/.gitkeep
+
+# OS
 .DS_Store
-.DS_Store?
-._*
 Thumbs.db
-ehthumbs.db
 
 # Editor/IDE
 .vscode/
@@ -19,13 +18,7 @@ ehthumbs.db
 *.swp
 *.swo
 *~
-*.sublime-*
 
-# Temp files
-tmp/
+# Temp
 *.tmp
-*.temp
 *.bak
-
-# Logs (optional - uncomment if you want to exclude)
-# *.log

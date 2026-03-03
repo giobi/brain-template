@@ -1,198 +1,138 @@
-# Brain Template 🧠
+# Brain Template
 
-A comprehensive template for organizing your "second brain" with AI agents (Claude Code, Codex CLI, etc.) using the **Dilts Framework** for personality customization.
+Un template per creare il tuo **brain** — knowledge base personale strutturato, progettato per funzionare con AI agent (Claude Code, Gemini CLI, Cursor, qualsiasi cosa legga markdown).
 
-## ✨ Features
+Il brain non è l'AI. L'AI è il motore, sostituibile. Il brain è la conoscenza: decisioni, relazioni, progetti, appunti, log. Portabile, di proprietà dell'utente.
 
-- **Interactive onboarding** with 20+ questions
-- **Dilts Framework** - 8-parameter personality system
-- **Modular system files** (SOUL, IDENTITY, USER, AGENTS, TOOLS)
-- **Example configurations** for different roles
-- **Privacy-first** design
-- **Agent-agnostic** - works with any AI assistant
+## Quick Start
 
-## 🚀 Quick Start
+```bash
+git clone https://github.com/giobi/brain-template.git my-brain
+cd my-brain
+cp .env.example .env
+```
 
-1. **Clone this repository**
-   ```bash
-   git clone https://github.com/giobibe/brain-template.git my-brain
-   cd my-brain
-   ```
+Apri con il tuo AI agent (es. `claude` o `gemini`). L'agent leggerà `BOOTSTRAP.md` e ti guiderà nel setup iniziale.
 
-2. **Open with your AI agent**
-   ```bash
-   claude chat  # or your preferred AI CLI
-   ```
-
-3. **Follow the onboarding**
-   - The agent will read `BOOTSTRAP.md`
-   - Answer 20 questions about yourself and preferences
-   - System files will be auto-generated
-   - `BOOTSTRAP.md` gets deleted after setup
-
-4. **Start using your brain!**
-
-## 📁 Structure
-
-After setup, your brain will have:
+## Struttura
 
 ```
 brain/
-├── SOUL.md          # Agent philosophy and boundaries
-├── IDENTITY.md      # Personality parameters (Dilts framework)
-├── USER.md          # Your context and preferences
-├── AGENTS.md        # Operational rules and workflows
-├── TOOLS.md         # Reference and integrations
-├── database/        # Structured knowledge
-│   ├── people/      # Contacts and relationships
-│   ├── companies/   # Organizations
-│   ├── projects/    # Active and past projects
-│   └── tech/        # Technical documentation
-├── diary/           # All chronological entries (personal + work)
-├── todo/            # Task management
-├── inbox/           # Temporary staging area
-└── .claude/         # Agent configuration
+├── boot/                ← sistema: protocollo, soul, identity, user
+│   ├── BRAIN.md         ← protocollo brain (immutabile)
+│   ├── soul.md          ← valori, limiti, continuità
+│   ├── identity.md      ← parametri personalità (scala 1-10)
+│   └── user.md          ← informazioni sull'utente
+├── wiki/                ← entità strutturate
+│   ├── projects/        ← progetti (obbligatorio)
+│   ├── people/          ← contatti
+│   └── companies/       ← aziende
+├── diary/               ← log temporale (cosa è successo quando)
+├── todo/                ← task aperti
+├── inbox/               ← input in arrivo da processare
+├── public/              ← file pubblicati (serviti via web, opzionale)
+├── storage/             ← temporanei, cache, database
+├── tools/lib/           ← script e wrapper
+├── .env                 ← credenziali (gitignored, MAI committare)
+├── manifest.json        ← versione protocollo e template
+└── BOOTSTRAP.md         ← onboarding (eliminato dopo setup)
 ```
 
-## 🎭 Dilts Framework
+## Come funziona
 
-Your agent's personality is defined by **8 independent parameters** (1-10 scale):
+### Boot Sequence
 
-| Parameter | What it controls |
-|-----------|------------------|
-| **Formality** | Communication style (casual ↔ professional) |
-| **Profanity** | Swearing allowance (clean ↔ creative profanity) |
-| **Verbosity** | Response length (concise ↔ thorough) |
-| **Technicality** | Jargon level (ELI5 ↔ maximum precision) |
-| **Proactivity** | Autonomy (ask first ↔ do without asking) |
-| **Security** | Risk tolerance (very cautious ↔ YOLO) |
-| **Warmth** | Engagement level (cold ↔ very warm) |
-| **Sarcasm** | Irony level (sincere ↔ caustic wit) |
+All'avvio, l'agent legge i file in ordine:
 
-You can adjust these **dynamically** during conversations:
-- "Be more formal"
-- "Less technical"
-- "Zero swearing"
+1. `boot/BRAIN.md` — protocollo (struttura, regole, sicurezza)
+2. `boot/soul.md` — filosofia e limiti
+3. `boot/identity.md` — parametri personalità
+4. `boot/user.md` — chi è l'utente
 
-## 🧠 Intelligent Adaptation
+### Frontmatter YAML
 
-The template **researches your domain** during setup:
-- WebSearch for role-specific best practices
-- Identifies privacy/compliance needs (GDPR, HIPAA, etc.)
-- Adapts Dilts parameters intelligently
-- Suggests domain-specific workflows
+Ogni file `.md` nel brain ha un frontmatter YAML:
 
-**Example:** "Molecular Chef" → Agent researches precision requirements, food safety, creative workflows → Tailors parameters accordingly.
-
-No static examples - **every setup is unique** to your role and sector.
-
-## 🔧 Customization
-
-### During Setup
-Answer the 20 onboarding questions to customize:
-- Agent name, creature, emoji
-- Your role, sector, timezone
-- All 8 personality parameters
-- Privacy rules
-- Working style preferences
-
-### After Setup
-Edit the system files directly:
-- `SOUL.md` - Philosophy and boundaries
-- `IDENTITY.md` - Personality parameters
-- `USER.md` - Your context
-- `AGENTS.md` - Workflows and rules
-- `TOOLS.md` - Local notes and integrations
-
-Changes take effect immediately in the next session.
-
-## 🔒 Privacy & Security
-
-- All data stays **local** by default
-- **Environment variables** - Store API keys in `.env` (gitignored, never committed)
-- `.env.example` provided with common integrations (safe to commit)
-- Customizable privacy rules per use case
-- GDPR-compliant example (recruiter)
-- No external sharing without permission
-
-### Using .env for Secrets
-
-```bash
-# 1. Copy example to .env
-cp .env.example .env
-
-# 2. Edit .env and add your API keys
-# OPENAI_API_KEY=sk-...
-# ANTHROPIC_API_KEY=sk-ant-...
-# DISCORD_BOT_TOKEN=...
-
-# 3. .env is gitignored - your secrets stay local!
+```yaml
+---
+date: '2026-03-01'
+type: diary
+tags:
+  - session
+  - progetto-x
+---
 ```
 
-**NEVER commit .env to git.** Always use `.env.example` with placeholder values for sharing configurations.
+Il campo `type` è obbligatorio. Il frontmatter garantisce che il brain sia navigabile e indicizzabile.
 
-## 📖 Documentation
+### Personalità
 
-- [Dilts Framework Guide](docs/dilts-framework.md) - Deep dive into personality parameters
-- [Customization Guide](docs/customization-guide.md) - How to tailor your brain
-- [FAQ](docs/faq.md) - Common questions
+L'agent ha parametri configurabili (scala 1-10):
 
-## 🤝 Compatible With
+| Parametro | Cosa controlla |
+|-----------|---------------|
+| Formalità | Stile comunicazione |
+| Emoji | Uso di emoji |
+| Verbosità | Lunghezza risposte |
+| Tecnicismo | Livello di gergo tecnico |
+| Proattività | Autonomia vs. chiedere prima |
+| Sarcasmo | Livello di ironia |
 
-- **Claude Code** (Anthropic) - Primary target
-- **Codex CLI** (OpenAI)
-- **Aider**
-- **Cursor**
-- Any AI agent that reads markdown files
+Modificabili al volo: "sii più formale", "zero emoji", "massima proattività".
 
-## 🛠️ Advanced Features
+## Naming Conventions
 
-### Memory System
-- **Daily entries**: `diary/YYYY/YYYY-MM-DD.md` (use tags: personal, work, technical)
-- **Structured data**: `database/{people,companies,projects}/`
+| Tipo | Pattern | Dove |
+|------|---------|------|
+| Diary/Log | `YYYY-MM-DD-slug.md` | `diary/YYYY/` |
+| Entità | `slug-name.md` | `wiki/{tipo}/` |
+| Progetti | `slug/index.md` | `wiki/projects/` |
+| TODO | `YYYY-MM-DD-slug.md` | `todo/` |
 
-### Dynamic Personality
-Change communication style on the fly:
+Tutto lowercase con hyphens. Mai spazi, mai underscore.
+
+## Sicurezza
+
+- Secrets in `.env`, sempre fuori da version control
+- Mai dati identificativi + dati sensibili in chiaro
+- Azioni distruttive mai senza conferma esplicita
+
+## Versioning
+
+Il file `manifest.json` traccia la versione del protocollo e del template. Le installazioni possono verificare se sono aggiornate confrontando con questo repo.
+
+```json
+{
+  "brain_protocol": { "version": "2.0" },
+  "template": { "version": "2.0" }
+}
 ```
-User: "Be more formal for this email"
-Agent: [adjusts Formality to 8/10]
 
-User: "Back to normal"
-Agent: [reverts to default Formality: 5/10]
-```
+## Estensibilità
 
-### Multi-Context Support
-Different personality profiles for:
-- Work contexts
-- Personal contexts
-- Group chats
-- External communications
+Il protocollo è **additive-only**:
 
-## 🌟 What Makes This Different
+- Puoi aggiungere sottocartelle a `wiki/`
+- Puoi aggiungere regole in `boot/local.md`
+- Puoi aggiungere nuovi `type` nel frontmatter
+- Puoi aggiungere wrapper in `tools/`
 
-1. **Personality System**: 8-parameter Dilts framework (not just "tone")
-2. **Interactive Setup**: Guided onboarding, not manual file editing
-3. **Intelligent Adaptation**: Researches your domain and tailors setup
-4. **Privacy-First**: Auto-detects compliance needs (GDPR, HIPAA, etc.)
-5. **Agent-Agnostic**: Works with any AI assistant
-6. **Production-Ready**: Based on real multi-user deployments (ABChat)
+Non puoi rimuovere cartelle obbligatorie, cambiare il formato del frontmatter, o sovrascrivere regole di sicurezza.
 
-## 📝 License
+## Compatibilità
 
-MIT License - see [LICENSE](LICENSE) file
+Funziona con qualsiasi AI agent che legge markdown:
+- Claude Code (Anthropic)
+- Gemini CLI (Google)
+- Cursor, Windsurf, Aider
+- Qualsiasi cosa legga file `.md`
 
-## 🙏 Credits
+Ogni motore ha il suo file di configurazione nella root (es. `CLAUDE.md`, `GEMINI.md`) che include i file di boot.
 
-Based on the **ABChat** multi-workspace architecture by Giobi Fasoli.
+## License
 
-Personality framework inspired by **Robert Dilts** Logical Levels model.
-
-## 🐛 Issues & Feedback
-
-Found a bug? Have a suggestion?
-
-Open an issue at: https://github.com/giobibe/brain-template/issues
+MIT — vedi [LICENSE](LICENSE)
 
 ---
 
-**Ready to build your second brain? Clone this repo and let's go! 🚀**
+Brain Protocol v2.0 — [giobi.com](https://giobi.com)

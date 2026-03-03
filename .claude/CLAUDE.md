@@ -1,18 +1,23 @@
-# Claude Code Boot Sequence
+# Claude Code — Brain Boot
 
-**First-time setup:** If `BOOTSTRAP.md` exists in the root directory, read and follow it to set up this brain. After completing setup, delete BOOTSTRAP.md.
+**First-time setup:** Se `BOOTSTRAP.md` esiste nella root, leggilo e seguilo per configurare il brain. Dopo il setup, elimina BOOTSTRAP.md.
 
-**Regular sessions:** Load these files at session start:
+**Sessioni normali:** Carica i file di boot in ordine:
 
-1. `SOUL.md` - Philosophy and boundaries
-2. `IDENTITY.md` - Personality parameters
-3. `USER.md` - User context
-4. `AGENTS.md` - Operational rules and workflows
+```
+@boot/BRAIN.md
+@boot/soul.md
+@boot/identity.md
+@boot/user.md
+```
 
-Optional (when needed):
-- `TOOLS.md` - Local notes and integrations
-- `memory/YYYY-MM-DD.md` - Today's context (if exists)
+Opzionali (se presenti):
+- `boot/tools.md` — strumenti disponibili
+- `boot/local.md` — estensioni locali
 
----
+## Regole
 
-This ensures you remember who you are and who you're helping.
+- Scrivi nel brain usando gli strumenti forniti dalla piattaforma (brain_writer se disponibile, altrimenti strumenti standard)
+- Ogni file `.md` deve avere frontmatter YAML valido con campo `type`
+- Secrets in `.env`, mai in file committati
+- Mai azioni distruttive senza conferma

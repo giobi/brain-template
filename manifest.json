@@ -1,0 +1,11 @@
+{
+  "brain_protocol": {
+    "version": "2.0",
+    "file": "boot/BRAIN.md",
+    "updated": "2026-03-02"
+  },
+  "template": {
+    "version": "2.0",
+    "updated": "2026-03-03"
+  }
+}
