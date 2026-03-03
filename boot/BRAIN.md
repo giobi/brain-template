@@ -1,6 +1,6 @@
 # BRAIN.md — Il Protocollo Brain
 
-**Versione**: 2.0 | **Ultimo aggiornamento**: 2026-03-02
+**Versione**: 2.1 | **Ultimo aggiornamento**: 2026-03-03
 
 Definisce cosa è un brain, come è strutturato, e come qualsiasi motore AI deve interagire con esso. Agnostico rispetto alla piattaforma.
 
@@ -14,11 +14,32 @@ Il brain è portabile, owned dall'utente, e cresce con ogni interazione.
 
 ---
 
+## File entry point della piattaforma
+
+Ogni motore AI ha il suo file entry point nella root del brain: `CLAUDE.md`, `GEMINI.md`, ecc.
+
+**Regola:** questi file sono **SOLO puntatori** a `boot/`. Zero contenuto proprio, zero regole duplicate. L'unica cosa che fanno è includere i file di boot nell'ordine corretto.
+
+Esempio corretto:
+```
+# Brain di [Nome Utente]
+
+@boot/brain.md
+@boot/soul.md
+@boot/identity.md
+@boot/user.md
+@boot/tools.md
+```
+
+Se servono regole specifiche per un motore, vanno in `boot/claude.md`, `boot/gemini.md`, ecc. — **mai** nel file entry point.
+
+---
+
 ## Struttura cartelle
 
 ```
 brain/
-├── boot/           Sistema: identity, soul, user + file della piattaforma
+├── boot/           Sistema: identity, soul, user, tools, brain protocol
 ├── wiki/           Entità strutturate
 │   ├── people/
 │   ├── companies/
@@ -43,15 +64,17 @@ Non creare altre cartelle nella root.
 
 ### boot/ — Identità e sistema
 
-File che definiscono chi è l'agente e chi è l'utente.
+File che definiscono chi è l'agente, chi è l'utente, e cosa può fare.
 
 | File | Contenuto | Note |
 |------|-----------|------|
+| `brain.md` | Questo protocollo (symlink a shared) | Piattaforma |
 | `soul.md` | Filosofia, missione, limiti, regole di comportamento | Per-utente |
 | `identity.md` | Parametri personalità: formalità, lingua, sarcasmo, emoji... | Per-utente |
 | `user.md` | Chi è l'utente: nome, ruolo, preferenze, contesto | Per-utente |
+| `tools.md` | Strumenti disponibili, wrapper, capability (symlink a shared) | Piattaforma |
 
-La piattaforma può aggiungere altri file in boot/ (regole operative, documentazione strumenti, protocollo brain). Questi file possono essere symlink a risorse condivise.
+La piattaforma può aggiungere file specifici per motore (`boot/claude.md`, `boot/gemini.md`) se servono regole specifiche.
 
 L'agente DEVE leggere boot/ a inizio sessione.
 
@@ -93,12 +116,33 @@ Contenuti serviti via web. L'URL dipende dalla piattaforma.
 | Cosa | Come |
 |------|------|
 | File singolo | `public/report.html` |
-| Mini-site | `public/nome-progetto/index.html` |
+| Mini-site | `public/progetto/titolo-report/index.html` |
+
+**Struttura minisite:**
+```
+public/
+├── progetto-a/
+│   ├── report-mensile/
+│   │   └── index.html
+│   └── analisi-seo/
+│       ├── index.html
+│       └── screenshot.png
+└── progetto-b/
+    └── stato-lavori/
+        └── index.html
+```
 
 **Regole:**
-- File HTML self-contained quando possibile (CSS/JS inline)
-- Niente dati sensibili
+- File HTML self-contained quando possibile (CSS/JS inline, Google Fonts OK)
+- Niente dati sensibili (password, token, dati personali)
 - Niente directory listing automatico del web server
+- Nomi cartella: `kebab-case` minuscolo
+- Il file principale DEVE chiamarsi `index.html`
+- Se servono asset (immagini, screenshot), nella stessa cartella del report
+
+**Template:** la piattaforma fornisce template HTML in `shared/templates/minisite/`. L'agente li usa come base, sostituendo i placeholder `{{...}}` con i dati reali e rimuovendo le sezioni non necessarie.
+
+Quando l'utente chiede di creare un report, una presentazione, o un deliverable visuale → crea un minisite in `public/`.
 
 ---
 
@@ -254,7 +298,13 @@ Esegui checkpoint automaticamente ai breakpoint naturali della sessione:
 - Annuncia cosa farai, aspetta ok
 - Preferisci operazioni reversibili
 
+### Workspace Isolation
+- Ogni workspace ha il suo `.env` isolato
+- Wrapper condivisi verificano le credenziali prima di eseguire
+- Niente credenziali = errore chiaro, nessuna azione
+- I workspace non possono vedere i dati degli altri
+
 ---
 
 *Maintained by: Giobi*
-*v1.0 (2026-02-27) — v2.0 (2026-03-02): protocollo reso agnostico, aggiunto shared/, .index.yaml, inbox protocol*
+*v1.0 (2026-02-27) — v2.0 (2026-03-02): agnostico, shared/, .index.yaml, inbox — v2.1 (2026-03-03): entry point files, minisite protocol, workspace isolation, eliminato AGENTS.md*
