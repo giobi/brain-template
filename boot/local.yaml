@@ -1,0 +1,32 @@
+# boot/local.yaml — Dove gira questo brain
+#
+# Descrive la macchina e le capability disponibili.
+# Aggiorna quando cambia l'infrastruttura.
+
+# === Identita' macchina ===
+platform: local               # server | local | container
+hostname: ""
+os: ""
+arch: ""
+
+# === Capability ===
+# Decommenta e compila quello che hai disponibile:
+
+# services:
+#   git: true
+#   python3: true
+#   node: true
+#   docker: true
+
+# capabilities:
+#   web_serving:
+#     url: https://...
+#     root: public/
+#   email:
+#     provider: gmail
+#     address: ...
+
+# === Secrets ===
+secrets:
+  path: .env
+  format: dotenv

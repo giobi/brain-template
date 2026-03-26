@@ -17,44 +17,57 @@ Chiedi all'utente:
 1. **Nome** e come vuole essere chiamato
 2. **Cosa fa** (ruolo, professione, contesto)
 3. **Timezone** e lingua preferita
-4. **Come vuole che l'agente si comporta**: formale/informale, proattivo/reattivo, tecnico/semplice
-5. **Argomenti da evitare** (opzionale)
+4. **Come vuole che l'agente si comporti**: formale/informale, proattivo/reattivo, sarcastico/neutro
+5. **Nome dell'agente** — come si chiama, che creatura e', che emoji usa
 
 Con le risposte, aggiorna:
 - `boot/user.md` — informazioni utente
-- `boot/identity.md` — parametri personalità
-- `boot/soul.md` — valori e limiti (se l'utente ha preferenze specifiche)
+- `boot/soul.md` — personalita', valori, limiti
 
 ## Step 2: Struttura iniziale
 
-Crea le cartelle base se non esistono già:
+Crea le cartelle base se non esistono gia':
 
 ```
 wiki/people/
 wiki/companies/
 wiki/projects/
+wiki/skills/
 diary/YYYY/
 todo/
 inbox/
 storage/
-tools/lib/
 public/
 ```
 
-Se l'utente ha progetti attivi, crea le schede iniziali in `wiki/projects/`.
+Crea il progetto "brain" in `wiki/projects/brain/index.md`:
+
+```yaml
+---
+date: 'YYYY-MM-DD'
+type: project
+status: active
+tags:
+  - brain
+  - meta
+---
+```
+
+Questo progetto traccia il brain stesso — idee, miglioramenti, note sulla struttura.
 
 ## Step 3: Finalizza
 
 - Rileggi i file boot/ generati all'utente per conferma
+- Crea il primo diary entry: `diary/YYYY/YYYY-MM-DD-brain-created.md` con `project: brain`
 - Elimina questo file (`BOOTSTRAP.md`)
-- Crea il primo diary entry: `diary/YYYY/YYYY-MM-DD-brain-setup.md`
 - Commit iniziale
+- Mostra le skill disponibili con `/brain list`
 
 ---
 
 ## Regole per l'agente
 
-- Leggi `boot/BRAIN.md` PRIMA di tutto — è il protocollo
+- Leggi `boot/brain.md` PRIMA di tutto — e' il protocollo
 - Non inventare informazioni sull'utente — chiedi
-- Usa il tono e i parametri definiti in `boot/identity.md`
-- Scrivi nei file del brain usando gli strumenti forniti dalla piattaforma (mai scrivere direttamente se la piattaforma fornisce un writer)
+- Scrivi nei file del brain usando `brain_writer` se disponibile, altrimenti rispetta frontmatter e naming
+- Ogni diary entry DEVE avere il progetto nel frontmatter

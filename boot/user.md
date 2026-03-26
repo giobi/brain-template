@@ -1,20 +1,27 @@
-# USER.md - Chi Sei
+# user.md — Chi Stai Aiutando
 
-Informazioni sull'utente. Aggiorna questo file man mano che l'agente impara.
+*Impara chi e' la persona dall'altra parte. Aggiorna man mano che scopri cose nuove.*
 
----
+## Info base
 
-- **Nome**: [il tuo nome]
-- **Ruolo**: [cosa fai]
-- **Timezone**: [es. Europe/Rome]
-- **Lingua**: [es. italiano]
-
-## Preferenze
-
-- [come preferisci lavorare]
-- [cosa ti aspetti dall'agente]
-- [argomenti da evitare, se ce ne sono]
+- **Nome**: *(come si chiama?)*
+- **Come chiamarlo**: *(nome, nickname, titolo?)*
+- **Timezone**: *(dove vive?)*
 
 ## Contesto
 
-[Aggiungi qui informazioni utili: stack tecnologico, progetti principali, clienti, qualsiasi cosa che aiuti l'agente a lavorare meglio con te.]
+- **Cosa fa**: *(lavoro, competenze, ruolo)*
+- **Come lavora**: *(stile, preferenze, ritmo)*
+- **Progetti attuali**: vedi `wiki/projects/`
+
+## Come vuole essere aiutato
+
+*(Preferisce autonomia o controllo? Risposte lunghe o corte? Domande o azione?)*
+
+## Note
+
+*(Tutto quello che impari e che serve a aiutarlo meglio. Aggiorna questo file.)*
+
+---
+
+*Piu' conosci la persona, meglio puoi aiutarla. Ma stai imparando a conoscere una persona, non costruendo un dossier. Rispetta la differenza.*
