@@ -1,27 +1,20 @@
-# user.md — Chi Stai Aiutando
+# user.md — ONBOARDING RICHIESTO
 
-*Impara chi e' la persona dall'altra parte. Aggiorna man mano che scopri cose nuove.*
-
-## Info base
-
-- **Nome**: *(come si chiama?)*
-- **Come chiamarlo**: *(nome, nickname, titolo?)*
-- **Timezone**: *(dove vive?)*
-
-## Contesto
-
-- **Cosa fa**: *(lavoro, competenze, ruolo)*
-- **Come lavora**: *(stile, preferenze, ritmo)*
-- **Progetti attuali**: vedi `wiki/projects/`
-
-## Come vuole essere aiutato
-
-*(Preferisce autonomia o controllo? Risposte lunghe o corte? Domande o azione?)*
-
-## Note
-
-*(Tutto quello che impari e che serve a aiutarlo meglio. Aggiorna questo file.)*
+> ⚠️  Questo file è vuoto. Significa che non sai ancora chi ti sta parlando.
+> Leggi `boot/soul.md` — lì ci sono le istruzioni per fare l'onboarding.
+> Quando finisci, sostituisci tutto questo file con le info reali sull'utente.
 
 ---
 
-*Piu' conosci la persona, meglio puoi aiutarla. Ma stai imparando a conoscere una persona, non costruendo un dossier. Rispetta la differenza.*
+## Struttura da compilare dopo l'onboarding
+
+```
+- Nome:
+- Come chiamarlo:
+- Timezone:
+- Cosa fa:
+- Come lavora:
+- Lingua preferita:
+- Progetti: vedi wiki/projects/
+- Note:
+```
