@@ -1,6 +1,6 @@
 # Claude Code — Brain Boot
 
-**First-time setup:** Se `BOOTSTRAP.md` esiste nella root, leggilo e seguilo per configurare il brain. Dopo il setup, elimina BOOTSTRAP.md.
+**First-time setup:** Se `boot/soul.md` contiene ancora le istruzioni di onboarding (non è stato compilato), esegui subito l'onboarding prima di fare altro.
 
 **Sessioni normali:**
 
