@@ -34,7 +34,6 @@ brain/
 ├── storage/             ← temporanei, cache, database
 ├── tools/lib/           ← script e wrapper
 ├── .env                 ← credenziali (gitignored, MAI committare)
-├── manifest.json        ← versione protocollo e template
 ```
 
 ## Come funziona
@@ -98,7 +97,6 @@ Tutto lowercase con hyphens. Mai spazi, mai underscore.
 
 ## Versioning
 
-Il file `manifest.json` traccia la versione del protocollo e del template. Le installazioni possono verificare se sono aggiornate confrontando con questo repo.
 
 ```json
 {
