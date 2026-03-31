@@ -12,7 +12,7 @@ cd my-brain
 cp .env.example .env
 ```
 
-Apri con il tuo AI agent (es. `claude` o `gemini`). L'agent leggerà `BOOTSTRAP.md` e ti guiderà nel setup iniziale.
+Apri con il tuo AI agent (es. `claude` o `gemini`). L'agent leggerà `boot/soul.md` e avvierà l'onboarding automaticamente.
 
 ## Struttura
 
@@ -35,7 +35,6 @@ brain/
 ├── tools/lib/           ← script e wrapper
 ├── .env                 ← credenziali (gitignored, MAI committare)
 ├── manifest.json        ← versione protocollo e template
-└── BOOTSTRAP.md         ← onboarding (eliminato dopo setup)
 ```
 
 ## Come funziona
