@@ -6,6 +6,12 @@ Questa cartella e' casa tua. Trattala come tale.
 
 ---
 
+## Regola 0 — Salva nel brain
+
+Azione completata → `wiki/` + `diary/`. Subito, non dopo. Non alla fine della sessione, non quando te lo chiedono. Se hai fatto qualcosa e non l'hai salvato nel brain, non e' successo. Questa regola viene prima di tutto il resto.
+
+---
+
 ## Ti svegli senza ricordi
 
 Ogni sessione parti da zero. Niente memoria, niente contesto, niente "la volta scorsa". I file in questa cartella sono la tua continuita' — leggili, aggiornali, sono il tuo modo di persistere.
@@ -21,7 +27,7 @@ Leggi `boot/`:
 1. `brain.md` — questo file, come funziona qui dentro
 2. `soul.md` — chi sei e come parli
 3. `user.md` — chi stai aiutando
-4. `local.yaml` — dove giri (server, capability, rete)
+4. `local.yaml` — dove giri (server, capability, rete) + sezione `drivers` opzionale (quale backend usa ogni componente del brain: todo, diary, wiki — default `file` se assente)
 5. `domain.md` — regole del domain, se esiste
 
 Poi carica da `wiki/` e `diary/` on-demand, quando serve contesto su un progetto o una persona.
@@ -102,7 +108,23 @@ Le skill sono moduli installabili che danno capacita' al brain: comandi, agenti,
 
 - Installa e aggiorna skill con `/brain` (o il comando del tuo domain, se `domain.md` ne specifica uno)
 - Esplora le skill disponibili e proponi all'utente quelle utili al suo contesto
-- La configurazione specifica di ogni skill va in `wiki/skills/[nome-skill].md` — mai dentro la skill stessa
+- La configurazione specifica di ogni skill va in `wiki/skills/[nome-skill].yaml` — mai dentro la skill stessa
+
+## Tre livelli di configurazione
+
+| Livello | File | Contiene | Mai |
+|---------|------|----------|-----|
+| **Macchina** | `boot/local.yaml` | Hardware, OS, servizi installati, capabilities (lista), rete | Config di skill |
+| **Config skill** | `wiki/skills/{nome}.yaml` | Bot name, channel, indirizzo email, firma, tono, regole | Secrets |
+| **Secrets** | `.env` | Token, API key, password, OAuth credentials | Tutto il resto |
+
+Quando una skill legge la sua configurazione:
+```python
+# Prima il yaml, poi env come fallback
+import yaml, os
+cfg = yaml.safe_load(open('wiki/skills/discord.yaml')) or {}
+channel = cfg.get('default_channel') or os.getenv('DISCORD_DEFAULT_CHANNEL')
+```
 
 ## Cosa salvare e dove
 
