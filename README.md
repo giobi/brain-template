@@ -1,135 +1,74 @@
-# Brain Template
+# Brain Protocol
 
-Un template per creare il tuo **brain** — knowledge base personale strutturato, progettato per funzionare con AI agent (Claude Code, Gemini CLI, Cursor, qualsiasi cosa legga markdown).
+Open specification for structured AI agent workspaces.
 
-Il brain non è l'AI. L'AI è il motore, sostituibile. Il brain è la conoscenza: decisioni, relazioni, progetti, appunti, log. Portabile, di proprietà dell'utente.
+**Markdown-first, git-versioned, LLM-agnostic, human-readable.**
+
+> The AI model is replaceable. The brain is not.
+
+## What is it
+
+Brain Protocol is a convention — not a framework, not software. It defines how to organize markdown files so any AI agent can read them, write to them, and accumulate knowledge over time.
+
+Your brain is yours: portable, readable, versioned. Works with Claude, Gemini, GPT-4o, Cursor, Aider, or anything that reads files.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/giobi/brain-template.git my-brain
+git clone https://github.com/giobi/brainprotocol.git my-brain
 cd my-brain
-cp .env.example .env
 ```
 
-Apri con il tuo AI agent (es. `claude` o `gemini`). L'agent leggerà `boot/soul.md` e avvierà l'onboarding automaticamente.
+Open with your AI agent. It will read `boot/soul.md` and start the interactive onboarding.
 
-## Struttura
+## Structure
 
 ```
 brain/
-├── boot/                ← sistema: protocollo, soul, identity, user
-│   ├── BRAIN.md         ← protocollo brain (immutabile)
-│   ├── soul.md          ← valori, limiti, continuità
-│   ├── identity.md      ← parametri personalità (scala 1-10)
-│   └── user.md          ← informazioni sull'utente
-├── wiki/                ← entità strutturate
-│   ├── projects/        ← progetti (obbligatorio)
-│   ├── people/          ← contatti
-│   └── companies/       ← aziende
-├── diary/               ← log temporale (cosa è successo quando)
-├── todo/                ← task aperti
-├── inbox/               ← input in arrivo da processare
-├── public/              ← file pubblicati (serviti via web, opzionale)
-├── storage/             ← temporanei, cache, database
-├── tools/lib/           ← script e wrapper
-├── .env                 ← credenziali (gitignored, MAI committare)
+├── boot/         ← Identity: who you are, how the AI behaves
+├── wiki/         ← Structured entities: people, companies, projects
+├── diary/        ← Temporal log: what happened, when, why
+├── todo/         ← Open tasks with frontmatter and tags
+├── inbox/        ← Staging area for incoming stuff
+├── public/       ← Published files, served via web
+├── storage/      ← Temporary files, cache, unstructured data
+└── .env          ← Credentials (always gitignored)
 ```
 
-## Come funziona
-
-### Boot Sequence
-
-All'avvio, l'agent legge i file in ordine:
-
-1. `boot/BRAIN.md` — protocollo (struttura, regole, sicurezza)
-2. `boot/soul.md` — filosofia e limiti
-3. `boot/identity.md` — parametri personalità
-4. `boot/user.md` — chi è l'utente
-
-### Frontmatter YAML
-
-Ogni file `.md` nel brain ha un frontmatter YAML:
+Every `.md` file has YAML frontmatter:
 
 ```yaml
 ---
-date: '2026-03-01'
 type: diary
+date: '2026-04-03'
+project: my-project
 tags:
-  - session
-  - progetto-x
+  - meeting
+  - decisions
 ---
 ```
 
-Il campo `type` è obbligatorio. Il frontmatter garantisce che il brain sia navigabile e indicizzabile.
+## Skills
 
-### Personalità
+Skills are installable modules: commands, agents, automations, integrations. Install with `/brain install <skill>`. Skills are protocol-level — they work on any brain, with any LLM.
 
-L'agent ha parametri configurabili (scala 1-10):
+## Compatibility
 
-| Parametro | Cosa controlla |
-|-----------|---------------|
-| Formalità | Stile comunicazione |
-| Emoji | Uso di emoji |
-| Verbosità | Lunghezza risposte |
-| Tecnicismo | Livello di gergo tecnico |
-| Proattività | Autonomia vs. chiedere prima |
-| Sarcasmo | Livello di ironia |
+Works with any AI agent that reads markdown:
 
-Modificabili al volo: "sii più formale", "zero emoji", "massima proattività".
-
-## Naming Conventions
-
-| Tipo | Pattern | Dove |
-|------|---------|------|
-| Diary/Log | `YYYY-MM-DD-slug.md` | `diary/YYYY/` |
-| Entità | `slug-name.md` | `wiki/{tipo}/` |
-| Progetti | `slug/index.md` | `wiki/projects/` |
-| TODO | `YYYY-MM-DD-slug.md` | `todo/` |
-
-Tutto lowercase con hyphens. Mai spazi, mai underscore.
-
-## Sicurezza
-
-- Secrets in `.env`, sempre fuori da version control
-- Mai dati identificativi + dati sensibili in chiaro
-- Azioni distruttive mai senza conferma esplicita
-
-## Versioning
-
-
-```json
-{
-  "brain_protocol": { "version": "2.0" },
-  "template": { "version": "2.0" }
-}
-```
-
-## Estensibilità
-
-Il protocollo è **additive-only**:
-
-- Puoi aggiungere sottocartelle a `wiki/`
-- Puoi aggiungere regole in `boot/local.md`
-- Puoi aggiungere nuovi `type` nel frontmatter
-- Puoi aggiungere wrapper in `tools/`
-
-Non puoi rimuovere cartelle obbligatorie, cambiare il formato del frontmatter, o sovrascrivere regole di sicurezza.
-
-## Compatibilità
-
-Funziona con qualsiasi AI agent che legge markdown:
 - Claude Code (Anthropic)
 - Gemini CLI (Google)
+- GPT-4o / ChatGPT
 - Cursor, Windsurf, Aider
-- Qualsiasi cosa legga file `.md`
+- Codex CLI, Mistral, Llama
 
-Ogni motore ha il suo file di configurazione nella root (es. `CLAUDE.md`, `GEMINI.md`) che include i file di boot.
+## Links
 
-## License
-
-MIT — vedi [LICENSE](LICENSE)
+- **Website**: [brainprotocol.it](https://brainprotocol.it)
+- **Specification**: [boot/brain.md](boot/brain.md)
+- **License**: MIT
 
 ---
 
-Brain Protocol v2.0 — [giobi.com](https://giobi.com)
+Brain Protocol v5.1 — [giobi.com](https://giobi.com)
+
