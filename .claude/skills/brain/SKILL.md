@@ -69,12 +69,12 @@ When `intent == "setup"`:
 1. Fetch the install promptone:
 
 ```bash
-curl -sL https://abchat.it/install
+curl -sL https://brainprotocol.it/install
 ```
 
-2. Read the fetched content completely and follow all steps from the beginning (Step 0 through Step 9).
+2. Read the fetched content completely and follow all instructions.
 
-This is equivalent to the user running `curl -sL https://abchat.it/install` and pasting the result as a prompt — just automated.
+This is equivalent to the user running `curl -sL https://brainprotocol.it/install` and pasting the result as a prompt — just automated.
 
 ---
 
