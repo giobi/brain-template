@@ -82,26 +82,33 @@ git push origin main
 
 ### Step 6: Time Tracking + EWAF Save
 
+Spec EWAF: `wiki/tech/ewaf.md`.
+
 ```python
-import sqlite3
+import os, sqlite3
 from datetime import datetime
 
-db = sqlite3.connect('/home/claude/brain/brain.sqlite')
-db.execute('''
-    INSERT INTO sessions (
-        date, session, project,
-        human_estimate_min, prompting_time_min, time_saved_min,
-        earth, water, fire, air, note
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-''', (
-    datetime.now().isoformat(),
-    "session-name", "project",
-    human_min, prompting_min, saved_min,
-    earth_rating, water_rating, fire_rating, air_rating,
-    "EWAF reasoning"
-))
-db.commit()
+brain_root = os.environ.get('BRAIN_ROOT', os.getcwd())
+db_path = os.path.join(brain_root, 'brain.sqlite')
+
+if os.path.exists(db_path):
+    db = sqlite3.connect(db_path)
+    db.execute('''
+        INSERT INTO sessions (
+            date, session, project,
+            human_estimate_min, prompting_time_min, time_saved_min,
+            earth, water, fire, air, note
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        datetime.now().isoformat(),
+        session_name, project,
+        human_min, prompting_min, saved_min,
+        earth_rating, water_rating, fire_rating, air_rating,
+        "EWAF reasoning"
+    ))
+    db.commit()
+    db.close()
+# se brain.sqlite non esiste → no-op
 ```
 
 ### Step 7: Pendenze Check
