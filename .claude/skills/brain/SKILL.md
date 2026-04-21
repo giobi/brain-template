@@ -206,11 +206,11 @@ import sys; sys.path.insert(0, '.claude/skills/brain-writer')
 from brain_writer import create_entity
 
 create_entity('skills', skill_name, f'''
-Parametri per la skill **{skill_name}**.
+Parameters for skill **{skill_name}**.
 
 ## Configuration
 
-_Nessuna configurazione necessaria._
+_No configuration needed._
 ''', entity_type='tech', tags=['skill', 'installed', skill_name])
 ```
 
@@ -319,24 +319,24 @@ for name, plugin in registry_plugins.items():
 ```
 /brain nuove
 
-🆕 Skill non ancora installate (5):
+🆕 Skills not yet installed (5):
   telegram     Telegram Bot — send messages, read inbox, manage bot interactions
   discord      Discord Bot — send messages to channels, DMs, and project channels
   gmail        Gmail orchestrator — read, triage, draft in-thread replies
   imagen       AI image generation — Gemini Imagen, fal.ai, Replicate Flux
   schedule     Schedule manager — list, add, edit brain scheduled tasks
 
-🔄 Aggiornamenti disponibili (2):
+🔄 Updates available (2):
   brainstorm   v1.0.0 → v1.1.0
   save         v1.0.0 → v1.1.0
 
-Per installare: /brain install <nome>
-Per aggiornare tutto: /brain update
+To install: /brain install <nome>
+To update all: /brain update
 ```
 
-Se non c'è niente di nuovo:
+If there's nothing new:
 ```
-Tutto aggiornato ✓ — 28 skill installate, nessuna novità nel registry.
+All up to date ✓ — 28 skills installed, nothing new in registry.
 ```
 
 ## Info Flow
@@ -401,7 +401,7 @@ At runtime, the SKILL.md instructions say: "Read your parameters from `wiki/skil
      exit 0
    fi
    if [[ "$file_path" =~ memory/ ]]; then
-     jq -n '{decision:"block",reasoning:"memory/ blocked by brain",message:"BLOCKED: memory/ non va usata. Il brain (wiki/, diary/, boot/) è la tua memoria."}'
+     jq -n '{decision:"block",reasoning:"memory/ blocked by brain",message:"BLOCKED: memory/ is not used. The brain (wiki/, diary/, boot/) is your memory."}'
      exit 2
    fi
    jq -n '{decision:"approve",reasoning:"Not a memory path"}'
@@ -443,7 +443,7 @@ Unlike the structural doctor (which checks format and structure), the semantic d
 
 ### What it detects
 
-Scan the entire brain and classify findings into these categories:
+Scan the entire brain and classify findings into these categoriess:
 
 | Category | Icon | What it means |
 |----------|------|---------------|
@@ -494,26 +494,26 @@ Present findings ONE CATEGORY AT A TIME, starting from the most impactful:
 ```
 🧠 Brain Doctor Semantic — Analisi completa
 
-Trovati 12 problemi in 5 categorie.
+Found 12 issues in 5 categories.
 
 ---
 
-📁 ROGUE — Cartelle/file fuori struttura (2 trovati)
+📁 ROGUE — Folders/files outside standard structure (2 found)
 
-  1. `progetti/DHL/` — cartella non standard nella root.
-     Contiene: README.md (boilerplate React+Vite), nessun file .md del brain.
+  1. `progetti/DHL/` — non-standard folder in root.
+     Contains: README.md (boilerplate React+Vite), no brain .md files.
 
-     Cosa vuoi fare?
-     [a] Sposta in storage/dhl/
-     [b] Sposta in wiki/projects/dhl/
-     [c] Elimina (non contiene dati brain)
-     [d] Lascia com'è (skip)
+     What do you want to do?
+     [a] Move to storage/dhl/
+     [b] Move to wiki/projects/dhl/
+     [c] Delete (no brain data)
+     [d] Leave as is (skip)
 
-  2. `progetti/EsercizioLoginEcommerce_SpringBoot.zip` — file .zip nella root
+  2. `progetti/EsercizioLoginEcommerce_SpringBoot.zip` — .zip file in root
 
-     Cosa vuoi fare?
-     [a] Sposta in storage/
-     [b] Elimina
+     What do you want to do?
+     [a] Move to storage/
+     [b] Delete
      [c] Skip
 ```
 
@@ -540,13 +540,13 @@ For each user decision:
 ```
 🧠 Doctor Semantic — Riepilogo
 
-Eseguiti: 8 azioni
-  - 2 file spostati (progetti/ → storage/)
-  - 3 stub arricchiti
-  - 1 file rinominato
-  - 2 skippati
+Executed: 8 actions
+  - 2 files moved (progetti/ → storage/)
+  - 3 stubs enriched
+  - 1 file renamed
+  - 2 skipped
 
-Il brain è più pulito. Prossimo passo consigliato: /brain doctor (check strutturale).
+The brain is cleaner. Suggested next step: /brain doctor (structural check).
 ```
 
 ### Notes
@@ -555,7 +555,7 @@ Il brain è più pulito. Prossimo passo consigliato: /brain doctor (check strutt
 - Always explain WHY something is a finding, not just WHAT
 - Respect user decisions — if they skip something, don't nag
 - After execution, if the brain has git, suggest a commit with the changes
-- Can be triggered with NLP: "pulisci il brain", "riordina", "cosa c'è da sistemare", "mergia i duplicati"
+- Can be triggered with NLP: "clean up the brain", "reorganize", "what needs fixing", "merge duplicates"
 
 ## Diff Flow
 

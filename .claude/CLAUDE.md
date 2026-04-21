@@ -1,8 +1,8 @@
 # Claude Code — Brain Boot
 
-**First-time setup:** Se `boot/soul.md` contiene ancora le istruzioni di onboarding (non è stato compilato), esegui subito l'onboarding prima di fare altro.
+**First-time setup:** If `boot/soul.md` still contains the onboarding instructions (hasn't been filled in), run the onboarding immediately before doing anything else.
 
-**Sessioni normali:**
+**Normal sessions:**
 
 @boot/brain.md
 @boot/soul.md

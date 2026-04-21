@@ -1,16 +1,16 @@
-# boot/local.yaml — Dove gira questo brain
+# boot/local.yaml — Where this brain runs
 #
-# Descrive la macchina e le capability disponibili.
-# Aggiorna quando cambia l'infrastruttura.
+# Describes the machine and available capabilities.
+# Update when infrastructure changes.
 
-# === Identita' macchina ===
+# === Machine identity ===
 platform: local               # server | local | container
 hostname: ""
 os: ""
 arch: ""
 
-# === Capability ===
-# Decommenta e compila quello che hai disponibile:
+# === Capabilities ===
+# Uncomment and fill in what you have available:
 
 # services:
 #   git: true

@@ -55,15 +55,15 @@ In progress - session continues
 
 #### 2a. Update project file (ALWAYS)
 
-| Cosa | Dove va | Dove NON va |
-|------|---------|-------------|
-| Stato attuale | `index.md` — UNA riga, SOSTITUISCI | Non appendere timeline |
-| Eventi datati | `diary/YYYY/` con tag progetto | NON in index.md |
-| Issue tracking | `{progetto}/issues.md` | NON in index.md |
+| What | Where it goes | Where it does NOT go |
+|------|---------------|----------------------|
+| Current status | `index.md` — ONE line, REPLACE | Don't append timeline |
+| Dated events | `diary/YYYY/` with project tag | NOT in index.md |
+| Issue tracking | `{project}/issues.md` | NOT in index.md |
 
 #### 2b. Update people/companies (if relevant)
 
-#### 2c. Update diary (se c'e lavoro concreto)
+#### 2c. Update diary (if there's concrete work)
 
 #### 2d. When to ask vs. act
 - **Act without asking**: updating existing files, appending to diary
@@ -89,16 +89,16 @@ git push origin $(git branch --show-current)
 ### Step 5: Update Tmux Pane Title
 
 ```bash
-~/.tmux/set-pane-title.sh "EMOJI project / fase"
+~/.tmux/set-pane-title.sh "EMOJI project / phase"
 ```
 
 ### Step 6: Pending Items Review
 
 ```
-Ancora in sospeso:
+Still pending:
 - [item 1] — [why it's open]
 - [item 2] — [why it's open]
-(oppure: niente in sospeso)
+(or: nothing pending)
 ```
 
 ### Output

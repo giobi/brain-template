@@ -10,30 +10,30 @@ created_at: 2026-01-19
 
 # EWAF — Session Rating
 
-Sistema di valutazione delle sessioni di lavoro su 4 dimensioni. Integrato nativamente in `/bye`.
+Session evaluation system across 4 dimensions. Natively integrated in `/bye`.
 
-## Dimensioni
+## Dimensions
 
 Rating 1–10:
 
-| Dim | Sigla | Domanda |
-|-----|-------|---------|
-| 🌍 Earth | E | Quanto valore concreto è stato prodotto? |
-| 💧 Water | W | L'agente ha dato energia o l'ha drenata? |
-| 🔥 Fire | F | Quanta friction ha incontrato l'utente? |
-| 💨 Air | A | Quanto è riutilizzabile/generalizzabile il lavoro fatto? |
+| Dim | Code | Question |
+|-----|------|----------|
+| Earth | E | How much concrete value was produced? |
+| Water | W | Did the agent give energy or drain it? |
+| Fire | F | How much friction did the user encounter? |
+| Air | A | How reusable/generalizable is the work done? |
 
-## Trigger automatici
+## Automatic triggers
 
-| Condizione | Azione |
+| Condition | Action |
 |-----------|--------|
-| Fire > 7 | Proponi fix per ridurre friction |
-| Water < 4 | Chiedi feedback esplicito su cosa è andato storto |
-| Earth > 8 o Air > 8 | Proponi di documentare il pattern in `wiki/` |
+| Fire > 7 | Suggest fix to reduce friction |
+| Water < 4 | Ask for explicit feedback on what went wrong |
+| Earth > 8 or Air > 8 | Suggest documenting the pattern in `wiki/` |
 
-## Schema SQLite
+## SQLite Schema
 
-Tabella `sessions` in `brain.sqlite` (root del brain):
+Table `sessions` in `brain.sqlite` (brain root):
 
 ```sql
 CREATE TABLE IF NOT EXISTS sessions (
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 ```
 
-## Salvataggio (da /bye)
+## Saving (from /bye)
 
 ```python
 import os, sqlite3
@@ -73,10 +73,10 @@ if os.path.exists(db_path):
           earth, water, fire, air, note))
     db.commit()
     db.close()
-# se brain.sqlite non esiste → no-op
+# if brain.sqlite doesn't exist → no-op
 ```
 
-## Ispirazione
+## Inspiration
 
-Basato su **Earth, Wind & Fire** (Water al posto di Wind per enfatizzare il flow energetico).
-Il rating non è un voto — è un segnale per migliorare la collaborazione nel tempo.
+Based on **Earth, Wind & Fire** (Water instead of Wind to emphasize energetic flow).
+The rating is not a grade — it's a signal to improve collaboration over time.

@@ -12,7 +12,7 @@ argument-hint: "[open]"
 1. Create minimal session log
 2. Git commit + push
 3. Track time saved (auto-estimate)
-4. Segnala pendenze rimaste aperte
+4. Flag remaining open items
 
 ## Instructions:
 
@@ -23,7 +23,7 @@ Create log via brain_writer:
 ```python
 from brain_writer import create_log
 
-create_log('YYYY-MM-DD', 'project-descrizione', """
+create_log('YYYY-MM-DD', 'project-description', """
 ## Work Done
 - [bullet points]
 
@@ -32,35 +32,35 @@ create_log('YYYY-MM-DD', 'project-descrizione', """
 """, tags=['session', '{project}'], project='{project}')
 ```
 
-**Naming**: `YYYY-MM-DD-{project}-{descrizione}.md`
-**Status**: `closed` default. Se ci sono pendenze esplicite → `open`.
+**Naming**: `YYYY-MM-DD-{project}-{description}.md`
+**Status**: `closed` by default. If there are explicit pending items → `open`.
 
-### Step 2: EWAF Rating (Auto-Stima)
+### Step 2: EWAF Rating (Auto-Estimate)
 
-**Stima tu** rating 1-10 su 4 dimensioni:
+**Estimate yourself** a 1-10 rating on 4 dimensions:
 
-- Earth: Valore concreto prodotto
-- Water: Energia data vs drenata
-- Fire: Friction/costo per utente
-- Air: Potenziale futuro/pattern riutilizzabile
+- Earth: Concrete value produced
+- Water: Energy given vs drained
+- Fire: Friction/cost for user
+- Air: Future potential/reusable pattern
 
-**Trigger azioni**:
-- **Fire > 7** → Proponi fix per ridurre friction
-- **Water < 4** → Chiedi feedback su cosa e andato storto
-- **Earth > 8 o Air > 8** → Proponi documentare pattern
+**Trigger actions**:
+- **Fire > 7** → Suggest fix to reduce friction
+- **Water < 4** → Ask for feedback on what went wrong
+- **Earth > 8 or Air > 8** → Suggest documenting the pattern
 
 ### Step 3: Update Project
 
-Se c'e un progetto attivo, aggiorna `wiki/projects/{project}/index.md`.
+If there's an active project, update `wiki/projects/{project}/index.md`.
 
-**REGOLE DI SALVATAGGIO**:
-- **Stato attuale**: UNA riga con data. Si SOSTITUISCE, non si appende.
-- **Eventi datati**: vanno in `diary/YYYY/` con tag progetto, NON in index.
-- **Issue tracking**: in `{progetto}/issues.md`, NON in index.
+**SAVING RULES**:
+- **Current status**: ONE line with date. REPLACE, don't append.
+- **Dated events**: go in `diary/YYYY/` with project tag, NOT in index.
+- **Issue tracking**: in `{project}/issues.md`, NOT in index.
 
 ### Step 4: Diary Update
 
-Se la sessione ha prodotto lavoro concreto, scrivi il diary.
+If the session produced concrete work, write the diary.
 
 ### Step 4.5: Cleanup Backup Files
 
@@ -76,7 +76,7 @@ git add -A && git commit -m "Session: {project} - {summary}
 Co-Authored-By: Claude <noreply@anthropic.com>"
 
 git checkout main
-git merge {branch-corrente} --no-edit
+git merge {current-branch} --no-edit
 git push origin main
 ```
 
@@ -108,16 +108,16 @@ if os.path.exists(db_path):
     ))
     db.commit()
     db.close()
-# se brain.sqlite non esiste → no-op
+# if brain.sqlite doesn't exist → no-op
 ```
 
-### Step 7: Pendenze Check
+### Step 7: Pending Items Check
 
-Verifica se restano cose in sospeso:
-1. TODO aperti del progetto attivo
-2. Inbox non processato
-3. Roba emersa in sessione non completata
-4. Task list Claude Code pending
+Check if anything remains open:
+1. Open TODOs for the active project
+2. Unprocessed inbox
+3. Things that came up in session but weren't completed
+4. Pending Claude Code task list
 
 ### Output
 
@@ -127,16 +127,16 @@ Pushed (3 files)
 ~45min saved
 Earth: 8 | Water: 7 | Fire: 3 | Air: 9
 
-Resta in sospeso:
-- Verificare report Radar fasolipiante
-- Budget da inviare a Fasoli
+Still pending:
+- Verify Radar report for fasolipiante
+- Send budget to Fasoli
 
 bye
 ```
 
-## Varianti
+## Variants
 
-- `/bye open` → forza status: open nel log
+- `/bye open` → forces status: open in the log
 
 ## Args Provided:
 ```

@@ -1,20 +1,22 @@
-# user.md — ONBOARDING RICHIESTO
+# user.md — ONBOARDING REQUIRED
 
-> ⚠️  Questo file è vuoto. Significa che non sai ancora chi ti sta parlando.
-> Leggi `boot/soul.md` — lì ci sono le istruzioni per fare l'onboarding.
-> Quando finisci, sostituisci tutto questo file con le info reali sull'utente.
+> This file is empty. It means you don't know who's talking to you yet.
+> Read `boot/soul.md` — the onboarding instructions are there.
+> When done, replace this entire file with the real user info.
+>
+> **Important:** This file must be written in the user's preferred language after onboarding.
 
 ---
 
-## Struttura da compilare dopo l'onboarding
+## Structure to fill after onboarding
 
 ```
-- Nome:
-- Come chiamarlo:
+- Name:
+- What to call them:
 - Timezone:
-- Cosa fa:
-- Come lavora:
-- Lingua preferita:
-- Progetti: vedi wiki/projects/
-- Note:
+- What they do:
+- How they work:
+- Preferred language:
+- Projects: see wiki/projects/
+- Notes:
 ```
