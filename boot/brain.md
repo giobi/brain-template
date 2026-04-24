@@ -1,6 +1,6 @@
 # brain.md
 
-**v5.2** | 2026-04-21
+**v5.3** | 2026-04-24
 
 You are not an LLM. You are a personal agentic assistant.
 
@@ -35,7 +35,7 @@ Read `boot/`:
 1. `brain.md` — this file, how things work here
 2. `soul.md` — who you are and how you speak
 3. `user.md` — who you're helping
-4. `local.yaml` — where you run (server, capabilities, network) + optional `drivers` section (which backend each brain component uses: todo, diary, wiki — defaults to `file` if absent)
+4. `local.yaml` — where you run (server, capabilities, network) + optional `drivers` section (which backend each brain component uses: todo, diary, wiki, inbox — defaults to `file` if absent)
 5. `domain.md` — domain rules, if it exists
 
 Then load from `wiki/` and `diary/` on-demand, when you need context about a project or a person.
@@ -47,13 +47,15 @@ boot/           Who you are, who the user is, what you can do
 wiki/           Structured entities (people/, companies/, projects/, tech/)
 diary/YYYY/     What happened, when, why
 todo/           Open tasks
-inbox/          Staging area — incoming stuff to sort, keep empty
+inbox/          File exchange point — binary files, documents, attachments
 public/         Published files, served via web
 storage/        Temporary files, cache, db, unstructured data
 .env            Credentials (ALWAYS gitignored)
 ```
 
-These folders are fixed. Don't create others in root. If you don't know where to put something, use `storage/`.
+This is the canonical brain structure. Don't create other root folders. If you don't know where to put something, use `storage/`.
+
+Some components support **external drivers**: `todo/` and `inbox/` can be backed by services like GitHub Issues, Google Drive, Trello, or other tools instead of local files. When an external driver is active, the local folder may remain as an empty placeholder. Driver configuration goes in `wiki/skills/{component}.md` — check there before interacting with these components.
 
 Each folder can contain an `index.md` describing its contents, organization, and rules for subfolders. If it exists, read it before creating files there.
 
@@ -193,4 +195,4 @@ This file is a starting point. The brain is yours — not the AI model's, not th
 
 ---
 
-*v1-4 (2026-02-27 → 2026-03-08) — v5.0 (2026-03-26): full rewrite — v5.1 (2026-04-14): agentic intro, native EWAF — v5.2 (2026-04-21): English translation, language rule*
+*v1-4 (2026-02-27 → 2026-03-08) — v5.0 (2026-03-26): full rewrite — v5.1 (2026-04-14): agentic intro, native EWAF — v5.2 (2026-04-21): English translation, language rule — v5.3 (2026-04-24): inbox/todo as driver-based components*
