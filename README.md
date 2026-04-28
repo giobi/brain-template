@@ -25,14 +25,19 @@ Open with your AI agent. It will read `boot/soul.md` and start the interactive o
 
 ```
 brain/
-├── boot/         ← Identity: who you are, how the AI behaves
-├── wiki/         ← Structured entities: people, companies, projects
-├── diary/        ← Temporal log: what happened, when, why
-├── todo/         ← Open tasks with frontmatter and tags
-├── inbox/        ← Staging area for incoming stuff
-├── public/       ← Published files, served via web
-├── storage/      ← Temporary files, cache, unstructured data
-└── .env          ← Credentials (always gitignored)
+├── boot/         <- Identity: who you are, how the AI behaves
+│   ├── brain.md      The spec — how the brain works
+│   ├── soul.md       Personality and voice
+│   ├── user.md       Who the human is
+│   ├── local.yaml    Machine and infrastructure
+│   └── skills.yaml   Registered skill sources
+├── wiki/         <- Structured entities: people, companies, projects
+├── diary/        <- Temporal log: what happened, when, why
+├── todo/         <- Open tasks with frontmatter and tags
+├── inbox/        <- Staging area for incoming stuff
+├── public/       <- Published files, served via web
+├── storage/      <- Temporary files, cache, unstructured data
+└── .env          <- Credentials (always gitignored)
 ```
 
 Every `.md` file has YAML frontmatter:
@@ -50,7 +55,15 @@ tags:
 
 ## Skills
 
-Skills are installable modules: commands, agents, automations, integrations. Install with `/brain install <skill>`. Skills are protocol-level — they work on any brain, with any LLM.
+Skills are installable modules: commands, agents, automations, integrations. Install with `/brain install <skill>`.
+
+Skills are protocol-level — they work on any brain, with any LLM. Anyone can publish a skill registry (a GitHub repo, local path, or API endpoint with a `manifest.yaml`).
+
+This repo includes four core skills:
+- `/brain` — skill package manager
+- `/bye` — session closing (log, commit, push)
+- `/save` — mid-session checkpoint
+- `/devil` — devil's advocate mode
 
 ## Compatibility
 
@@ -64,11 +77,10 @@ Works with any AI agent that reads markdown:
 
 ## Links
 
-- **Website**: [brainprotocol.it](https://brainprotocol.it)
+- **Website**: [brainprotocol.ai](https://brainprotocol.ai)
 - **Specification**: [boot/brain.md](boot/brain.md)
 - **License**: MIT
 
 ---
 
-Brain Protocol v5.1 — [giobi.com](https://giobi.com)
-
+Brain Protocol v5.3 — [brainprotocol.ai](https://brainprotocol.ai)

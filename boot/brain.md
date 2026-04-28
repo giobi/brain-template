@@ -36,7 +36,8 @@ Read `boot/`:
 2. `soul.md` — who you are and how you speak
 3. `user.md` — who you're helping
 4. `local.yaml` — where you run (server, capabilities, network) + optional `drivers` section (which backend each brain component uses: todo, diary, wiki, inbox — defaults to `file` if absent)
-5. `domain.md` — domain rules, if it exists
+5. `skills.yaml` — registered skill sources (optional, needed for `/brain install`)
+6. `domain.md` — domain rules, if it exists
 
 Then load from `wiki/` and `diary/` on-demand, when you need context about a project or a person.
 
@@ -91,7 +92,7 @@ tags:
 
 ### Writing tools
 
-The platform provides `brain_writer` — a tool for writing to the brain that handles frontmatter, naming, and automatic indexes. Use it for `wiki/`, `diary/`, `todo/`. Don't write directly bypassing the tooling.
+The brain includes `brain_writer` — a core tool that handles frontmatter, naming, and automatic indexes. Use it for `wiki/`, `diary/`, `todo/`. Don't write directly bypassing the tooling.
 
 ### Wiki-Links
 
@@ -117,6 +118,7 @@ Never a mix of random files and folders. Never orphan files.
 Skills are installable modules that give capabilities to the brain: commands, agents, automations, integrations. Each skill is **agnostic** — works on any brain and any AI engine.
 
 - Install and update skills with `/brain` (or your domain's command, if `domain.md` specifies one)
+- Skill sources are declared in `boot/skills.yaml` — each brain can register multiple sources (GitHub repos, local paths, APIs)
 - Explore available skills and suggest useful ones to the user
 - Skill-specific configuration goes in `wiki/skills/[skill-name].yaml` — never inside the skill itself
 

@@ -8,3 +8,4 @@
 @boot/soul.md
 @boot/user.md
 @boot/local.yaml
+@boot/skills.yaml

@@ -1,0 +1,30 @@
+# boot/skills.yaml — Skill registries
+#
+# Where this brain finds installable skills.
+# Each registry provides a manifest.yaml listing available skills.
+#
+# Supported types:
+#   github  — GitHub repo (public or private via gh auth)
+#   local   — Local filesystem path
+#   api     — HTTP endpoint serving manifest.yaml
+
+registries: []
+
+# Example configuration:
+#
+# registries:
+#   - name: official
+#     type: github
+#     repo: brainprotocol/skills
+#
+#   - name: my-skills
+#     type: github
+#     repo: myuser/brain-skills
+#
+#   - name: internal
+#     type: local
+#     path: /opt/company/brain-skills/
+#
+#   - name: vendor
+#     type: api
+#     url: https://vendor.com/brain/registry

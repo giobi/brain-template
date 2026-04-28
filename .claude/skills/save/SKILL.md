@@ -86,13 +86,30 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 git push origin $(git branch --show-current)
 ```
 
-### Step 5: Update Tmux Pane Title
+### Step 5: EWAF Partial (mid-session snapshot)
+
+Quick estimate of the session SO FAR — same 4 dimensions as /bye but lighter:
+
+- Earth: Concrete value produced so far (0 if still researching)
+- Water: Energy balance — is the session flowing or dragging?
+- Fire: Friction encountered (blockers, misunderstandings, retries)
+- Air: Reusable patterns or knowledge emerging
+
+Include in the checkpoint log as a brief line:
+
+```
+EWAF partial: E6 W7 F3 A5 — shipping features, good flow, minor friction on hooks
+```
+
+No database save — EWAF partial is logged in the diary only. The final /bye rating is the one that gets persisted to brain.sqlite.
+
+### Step 6: Update Tmux Pane Title
 
 ```bash
 ~/.tmux/set-pane-title.sh "EMOJI project / phase"
 ```
 
-### Step 6: Pending Items Review
+### Step 7: Pending Items Review
 
 ```
 Still pending:
