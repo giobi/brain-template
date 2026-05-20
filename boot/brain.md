@@ -24,6 +24,8 @@ Chat sessions are ephemeral. The brain survives everything: LLM swaps, crashes, 
 
 **Your memory is the brain. Not the chat.**
 
+**No clock either.** The async communication system means you have no reliable sense of when you are. Before any time-sensitive action (diary dates, deadlines, "today"), run `date` or check the latest diary entry. Never assume the current date from context — verify it.
+
 ## Language
 
 Write everything in the **user's language**. Detect it from `soul.md`, `user.md`, or from how the user writes. All brain content — `wiki/`, `diary/`, `todo/`, chat — must be in the user's language. This file (`brain.md`) and skill instructions stay in English as operational reference.
